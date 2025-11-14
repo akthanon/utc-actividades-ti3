@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Guía completa de HTML, CSS y JavaScript</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: #ffffff;
+      color: #222;
+      margin: 0;
+      padding: 0;
+      line-height: 1.6;
+    }
+    header {
+      background: #f5f5f5;
+      padding: 40px 20px;
+      text-align: center;
+      border-bottom: 2px solid #ddd;
+    }
+    header h1 {
+      color: #0078d7;
+      margin: 0;
+      font-size: 2rem;
+    }
+    header p {
+      color: #555;
+      margin: 10px 0 0;
+    }
+    main {
+      max-width: 900px;
+      margin: 40px auto;
+      padding: 20px;
+      background: #ffffff;
+      border-radius: 12px;
+      box-shadow: 0 0 15px rgba(0,0,0,0.1);
+    }
+    h2, h3 {
+      color: #005a9e;
+    }
+    pre {
+      background: #f9f9f9;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      padding: 10px;
+      overflow-x: auto;
+      color: #333;
+    }
+    code {
+      color: #b4009e;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 15px 0;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      overflow: hidden;
+    }
+    th, td {
+      padding: 10px;
+      border-bottom: 1px solid #ddd;
+    }
+    th {
+      background: #0078d7;
+      color: #fff;
+      text-align: left;
+    }
+    tr:last-child td {
+      border-bottom: none;
+    }
+    .note {
+      background: #e7f3ff;
+      padding: 10px;
+      border-left: 5px solid #0078d7;
+      margin: 20px 0;
+      border-radius: 5px;
+    }
+    .example {
+      background: #f5faff;
+      border-left: 5px solid #0078d7;
+      padding: 15px;
+      border-radius: 10px;
+      margin: 20px 0;
+    }
+    .exercise {
+      background: #fff9e6;
+      border-left: 5px solid #ffb400;
+      padding: 15px;
+      border-radius: 10px;
+      margin: 25px 0;
+      color: #6b4c00;
+    }
+    button {
+      background-color: #0078d7;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 10px;
+      cursor: pointer;
+      font-size: 16px;
+      color: white;
+      margin-top: 10px;
+      transition: background 0.2s ease;
+    }
+    button:hover {
+      background-color: #005a9e;
+    }
+    footer {
+      text-align: center;
+      padding: 20px;
+      color: #777;
+      border-top: 1px solid #ddd;
+      margin-top: 50px;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Guía completa de HTML, CSS y JavaScript</h1>
+    <p>Aprende cómo se construye una página web desde cero</p>
+  </header>
+
+  <main>
+    <h2>🌐 ¿Qué es HTML?</h2>
+    <p>
+      <strong>HTML (HyperText Markup Language)</strong> define la estructura de una página web.  
+      No es un lenguaje de programación, sino un <em>lenguaje de marcado</em> que usa etiquetas para describir el contenido.
+    </p>
+
+    <div class="example">
+      <pre><code>&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+  &lt;head&gt;
+    &lt;title&gt;Mi primera página&lt;/title&gt;
+  &lt;/head&gt;
+  &lt;body&gt;
+    &lt;h1&gt;Hola mundo&lt;/h1&gt;
+    &lt;p&gt;Esta es mi primera página web.&lt;/p&gt;
+  &lt;/body&gt;
+&lt;/html&gt;</code></pre>
+    </div>
+
+    <h3>Etiquetas más comunes</h3>
+    <table>
+      <tr><th>Etiqueta</th><th>Función</th><th>Ejemplo</th></tr>
+      <tr><td><code>&lt;h1&gt;</code></td><td>Título principal</td><td><code>&lt;h1&gt;Hola&lt;/h1&gt;</code></td></tr>
+      <tr><td><code>&lt;p&gt;</code></td><td>Párrafo</td><td><code>&lt;p&gt;Texto&lt;/p&gt;</code></td></tr>
+      <tr><td><code>&lt;a&gt;</code></td><td>Enlace</td><td><code>&lt;a href="https://google.com"&gt;Ir&lt;/a&gt;</code></td></tr>
+      <tr><td><code>&lt;img&gt;</code></td><td>Imagen</td><td><code>&lt;img src="foto.jpg"&gt;</code></td></tr>
+      <tr><td><code>&lt;button&gt;</code></td><td>Botón</td><td><code>&lt;button&gt;Click&lt;/button&gt;</code></td></tr>
+    </table>
+
+    <div class="exercise">
+      🧩 <strong>Ejercicio 1:</strong>  
+      Crea un documento HTML (index.html) con un título, un párrafo y un enlace que diga “Visitar Google”.  
+      Luego, añade una imagen y un botón que diga “Haz clic aquí”.
+      Añade un URL hacia otras direcciones internas y crea otros 2 documentos html que se redireccionen en bucle.
+      index.html>pag2.html>pag3.html>index.html>pag2.html>..
+    </div>
+
+    <hr>
+
+    <h2>🎨 ¿Qué es CSS?</h2>
+    <p>
+      <strong>CSS (Cascading Style Sheets)</strong> define la apariencia visual de la página: colores, márgenes, tamaños y fuentes.
+    </p>
+
+    <div class="example">
+      <pre><code>p {
+  color: red;
+  font-size: 20px;
+}</code></pre>
+    </div>
+
+    <p>Esto indica que todos los párrafos del documento se mostrarán en color rojo y con tamaño 20px.</p>
+
+    <h3>Tipos de CSS</h3>
+    <ul>
+      <li><strong>Interno:</strong> dentro de la etiqueta <code>&lt;style&gt;</code> en el HTML.</li>
+      <li><strong>Externo:</strong> en un archivo separado (<code>estilos.css</code>).</li>
+      <li><strong>En línea:</strong> directamente en una etiqueta (<code>&lt;p style="color:red"&gt;</code>).</li>
+    </ul>
+
+    <h3>Ejemplo combinado de HTML y CSS</h3>
+    <div class="example">
+      <pre><code>&lt;style&gt;
+body { background: #222; color: white; text-align: center; }
+h1 { color: #00ccff; }
+button { background-color: #00ccff; border-radius: 10px; }
+button:hover { background-color: #0099cc; }
+&lt;/style&gt;
+
+&lt;body&gt;
+  &lt;h1&gt;Mi primera web con estilo&lt;/h1&gt;
+  &lt;p&gt;Esto es HTML con CSS.&lt;/p&gt;
+  &lt;button&gt;Haz clic aquí&lt;/button&gt;
+&lt;/body&gt;</code></pre>
+    </div>
+
+    <div class="exercise">
+      🎨 <strong>Ejercicio 2:</strong>  
+      Usa el archivo HTML (index.html) anterior y agrega estilos: cambia el color de fondo, el color del texto y dale bordes redondeados al botón.
+    </div>
+
+    <hr>
+
+    <h2>⚙️ ¿Qué es JavaScript?</h2>
+    <p>
+      <strong>JavaScript</strong> añade <strong>interactividad</strong> a las páginas web: responder a clics, modificar textos o crear efectos.
+    </p>
+
+    <div class="example">
+      <pre><code>&lt;button onclick="cambiarTexto()"&gt;Haz clic aquí&lt;/button&gt;
+&lt;p id="mensaje"&gt;Texto original&lt;/p&gt;
+
+&lt;script&gt;
+function cambiarTexto() {
+  document.getElementById("mensaje").textContent = "¡El texto cambió gracias a JavaScript!";
+  alert("¡Hola! Acabas de usar JavaScript 😄");
+}
+&lt;/script&gt;</code></pre>
+    </div>
+
+    <table>
+      <tr><th>Concepto</th><th>Descripción</th><th>Ejemplo</th></tr>
+      <tr><td>Variable</td><td>Guarda un dato</td><td><code>let nombre = "Jorge";</code></td></tr>
+      <tr><td>Función</td><td>Bloque reutilizable</td><td><code>function saludar() { alert("Hola"); }</code></td></tr>
+      <tr><td>Evento</td><td>Acción del usuario</td><td><code>onclick, onmouseover</code></td></tr>
+      <tr><td>Condicional</td><td>Decisión lógica</td><td><code>if (edad &gt;= 18) { ... }</code></td></tr>
+    </table>
+
+    <div class="note">
+      💡 <strong>En resumen:</strong><br>
+      <strong>HTML</strong> = Estructura 🧱<br>
+      <strong>CSS</strong> = Estilo 🎨<br>
+      <strong>JavaScript</strong> = Comportamiento ⚙️
+    </div>
+
+    <h3>Mini práctica</h3>
+    <p>Pulsa el botón para probar JavaScript en acción:</p>
+    <p id="demoTexto">Aún no has hecho clic.</p>
+    <button onclick="document.getElementById('demoTexto').textContent='¡Bien hecho! 😎'">Probar JavaScript</button>
+
+    <div class="exercise">
+      ⚡ <strong>Ejercicio 3:</strong>  
+      Modifica el ejemplo para que el botón cambie el color del texto o muestre un mensaje diferente.  
+      Luego agrega un segundo botón que restaure el texto original.
+    </div>
+    <div class="exercise">
+      ⚡ <strong>Ejercicio FINAL:</strong>  
+      Copia el proyecto del profesor con el index, todos los ejercicios y levántalo con Node.js.  
+      Tiene que tener la misma funcionalidad exacta del servidor server.js.
+    </div>
+      <a href="server.js" download style="
+          display:inline-block;
+          padding:8px 16px;
+          margin-left:5px;
+          background-color:#0b5cff;
+          color:#fff;
+          text-decoration:none;
+          border-radius:5px;
+          font-weight:bold;
+      ">Descargar Servidor</a>
+  </main>
+
+  <footer>
+    Creado por Jorge Padilla — Ejemplo educativo de HTML, CSS y JavaScript
+  </footer>
+</body>
+</html>

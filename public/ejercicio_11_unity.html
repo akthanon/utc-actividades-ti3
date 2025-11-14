@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tutorial Unity: Crear un Juego Simple</title>
+  </head>
+<body style="font-family: Arial, sans-serif; margin: 40px; background-color: #fafafa; color: #333; line-height: 1.6;">
+
+  <header>
+    <h1 style="text-align:center; color:#2c3e50;">🎮 Tutorial Unity: Crear un Juego Simple</h1>
+    <p style="text-align:center;">Aprende los conceptos básicos para crear tu primer juego en Unity.</p>
+    <hr>
+  </header>
+
+  <section>
+    <h2>¿Qué es Unity?</h2>
+    <p>
+      <strong>Unity</strong> es un motor de videojuegos multiplataforma que permite crear juegos en 2D y 3D.
+      Es muy popular por su facilidad de uso y gran comunidad. Puedes desarrollar para PC, consolas, móviles y realidad virtual.
+    </p>
+  </section>
+
+  <section>
+    <h2>Instalación de Unity</h2>
+    <ol>
+      <li>Visita <a href="https://unity.com/" target="_blank">https://unity.com/</a></li>
+      <li>Descarga Unity Hub y crea una cuenta si aún no tienes.</li>
+      <li>Desde Unity Hub, instala la versión recomendada de Unity (LTS).</li>
+      <li>Crea un nuevo proyecto: elige <strong>2D</strong> o <strong>3D</strong>, asigna un nombre y ubicación.</li>
+    </ol>
+  </section>
+
+  <section>
+    <h2>Estructura de un proyecto Unity</h2>
+    <ul>
+      <li><b>Scene:</b> Área donde colocas tus objetos y construyes tu juego.</li>
+      <li><b>GameObject:</b> Todo lo que existe en la escena: personajes, enemigos, cámaras, luces.</li>
+      <li><b>Component:</b> Script o comportamiento agregado a un GameObject.</li>
+      <li><b>Inspector:</b> Panel donde ajustas propiedades de los objetos.</li>
+      <li><b>Hierarchy:</b> Lista de todos los GameObjects de la escena.</li>
+      <li><b>Project:</b> Archivos y assets de tu proyecto.</li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>Primer Script en C#</h2>
+    <p>
+      Para agregar lógica, usamos scripts en C#. Por ejemplo, mover un personaje:
+    </p>
+<pre style="background-color:#eee; padding:15px; border-radius:10px;">
+using UnityEngine;
+
+public class PlayerController : MonoBehaviour
+{
+    public float speed = 5f;
+
+    void Update()
+    {
+        float moveX = Input.GetAxis("Horizontal") * speed * Time.deltaTime;
+        float moveY = Input.GetAxis("Vertical") * speed * Time.deltaTime;
+
+        transform.Translate(moveX, moveY, 0);
+    }
+}
+</pre>
+    <p>
+      Este script mueve un GameObject usando las teclas de flecha o WASD.
+    </p>
+  </section>
+
+  <section>
+    <h2>💪 Ejercicio práctico</h2>
+    <p>
+      Crea un juego simple en Unity con estos pasos:
+    </p>
+    <ol>
+      <li>Crea un <b>GameObject</b> llamado "Jugador" (puede ser un cuadrado 2D).</li>
+      <li>Agrega un script C# para moverlo con las teclas (como en el ejemplo).</li>
+      <li>Crea un <b>enemigo</b> que se mueva de forma automática de un lado a otro.</li>
+      <li>Detecta colisiones entre jugador y enemigo (puedes usar <code>OnCollisionEnter2D</code>).</li>
+      <li>Agrega un <b>contador de puntos</b> que aumente cuando el jugador esquiva al enemigo.</li>
+      <li>Prueba cambios de color o efectos visuales al colisionar.</li>
+    </ol>
+    <p style="background-color:#eef; padding:10px; border-left:4px solid #4a90e2; border-radius:5px;">
+      💡 Consejo: Explora los assets gratuitos en Unity Asset Store para personalizar tu juego.
+    </p>
+  </section>
+
+  <section>
+    <h2>📋 Resumen</h2>
+    <ul>
+      <li>Unity permite crear juegos de forma visual y con scripts en C#.</li>
+      <li>Los GameObjects y Components son la base de cualquier juego en Unity.</li>
+      <li>El bucle principal del juego y los eventos se gestionan automáticamente en Unity.</li>
+      <li>Se puede añadir física, animaciones y sonidos fácilmente usando la interfaz y scripts.</li>
+    </ul>
+  </section>
+
+  <footer style="margin-top:40px; text-align:center;">
+    <hr>
+    <p>📗 Guía creada para aprender los fundamentos de Unity.</p>
+  </footer>
+
+</body>
+</html>

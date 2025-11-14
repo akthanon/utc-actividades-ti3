@@ -1,0 +1,552 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Guía Extendida: C# Básico y POO</title>
+  
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 40px;
+      background-color: #fafafa;
+      color: #333;
+      line-height: 1.6;
+    }
+
+    header {
+      text-align: center;
+    }
+
+    header h1 {
+      color: #2c3e50;
+    }
+    
+    hr {
+      border: 0;
+      border-top: 1px solid #ccc;
+      margin: 20px 0;
+    }
+
+    pre {
+      background-color: #eee;
+      padding: 15px;
+      border-radius: 10px;
+      overflow-x: auto; /* Añadido para buen manejo del código */
+    }
+
+    /* Aplicando el estilo de "nota" del archivo 1 a las clases
+      .note y .ejercicio del archivo 2
+    */
+    .note, .ejercicio {
+      background-color: #eef;
+      padding: 10px;
+      border-left: 4px solid #4a90e2;
+      border-radius: 5px;
+      margin: 20px 0;
+    }
+    
+    /* Ocultamos los elementos de UI complejos (sidebar, tabs, botones)
+      del archivo 2, ya que no existen en el estilo del archivo 1.
+    */
+    .sidebar, 
+    .progress-container, 
+    .tabs, 
+    .code-copy, 
+    .nav-buttons, 
+    .toggle-btn,
+    button {
+      display: none;
+    }
+
+    /* Forzamos que el contenido de las pestañas y las soluciones
+      (que ahora están ocultas) sea visible
+    */
+    .tab-content, .toggle-content {
+      display: block !important;
+      max-height: none !important;
+      padding: 10px;
+      border: 1px dashed #ccc;
+      margin-top: 10px;
+    }
+
+    .step {
+      border-bottom: 1px dotted #ccc;
+      padding-bottom: 10px;
+      margin-bottom: 10px;
+    }
+
+    footer {
+      margin-top: 40px;
+      text-align: center;
+      border-top: 1px solid #ccc;
+      padding-top: 20px;
+    }
+
+    ul, ol {
+      margin-left: 25px;
+    }
+    
+    a {
+      color: #4a90e2; /* Usando el color de acento del archivo 1 */
+    }
+  </style>
+</head>
+<body>
+  
+  <header>
+    <h1>💻 Guía Extendida: C# Básico y POO</h1>
+    <p>Aprende desde fundamentos hasta herencia y polimorfismo</p>
+    <hr>
+  </header>
+
+  <div class="container">
+    <div class="progress-container">
+      <div class="progress-bar" id="progressBar"></div>
+    </div>
+    
+    <main>
+      <div class="content">
+        <h2>Instalación de C#</h2>
+        <p>Para comenzar a programar en C#, necesitarás instalar el entorno de desarrollo adecuado. Aquí tienes las opciones principales:</p>
+        
+        <div class="tab-container">
+          <div class="tabs">
+            <div class="tab active" data-tab="visualstudio">Visual Studio</div>
+            <div class="tab" data-tab="vscode">VS Code</div>
+            <div class="tab" data-tab="dotnet">.NET SDK</div>
+          </div>
+          
+          <div class="tab-content active" id="visualstudio">
+            <h4>Visual Studio (Recomendado para principiantes)</h4>
+            <div class="step">
+              <h4>Paso 1: Descarga</h4>
+              <p>Ve a <a href="https://visualstudio.microsoft.com/es/downloads/" target="_blank">visualstudio.microsoft.com</a> y descarga Visual Studio Community (gratuito).</p>
+            </div>
+            <div class="step">
+              <h4>Paso 2: Instalación</h4>
+              <p>Ejecuta el instalador y selecciona la carga de trabajo "Desarrollo de escritorio de .NET".</p>
+            </div>
+            <div class="step">
+              <h4>Paso 3: Verificación</h4>
+              <p>Crea un nuevo proyecto de "Aplicación de consola" y ejecuta el código "Hola Mundo" para verificar la instalación.</p>
+            </div>
+          </div>
+          
+          <div class="tab-content" id="vscode">
+            <h4>Visual Studio Code + Extensiones</h4>
+            <div class="step">
+              <h4>Paso 1: Descarga VS Code</h4>
+              <p>Descarga VS Code desde <a href="https://code.visualstudio.com/" target="_blank">code.visualstudio.com</a>.</p>
+            </div>
+            <div class="step">
+              <h4>Paso 2: Instalar .NET SDK</h4>
+              <p>Descarga e instala el .NET SDK desde <a href="https://dotnet.microsoft.com/download" target="_blank">dotnet.microsoft.com</a>.</p>
+            </div>
+            <div class="step">
+              <h4>Paso 3: Extensiones de C#</h4>
+              <p>En VS Code, instala la extensión "C#" de Microsoft desde el marketplace de extensiones.</p>
+            </div>
+          </div>
+          
+          <div class="tab-content" id="dotnet">
+            <h4>.NET SDK (Solo línea de comandos)</h4>
+            <div class="step">
+              <h4>Paso 1: Descarga</h4>
+              <p>Descarga el .NET SDK desde <a href="https://dotnet.microsoft.com/download" target="_blank">dotnet.microsoft.com</a>.</p>
+            </div>
+            <div class="step">
+              <h4>Paso 2: Verificación</h4>
+              <p>Abre una terminal y ejecuta <code>dotnet --version</code> para verificar la instalación.</p>
+            </div>
+            <div class="step">
+              <h4>Paso 3: Primer proyecto</h4>
+              <p>Crea un nuevo proyecto con <code>dotnet new console -n MiPrimerProyecto</code> y ejecútalo con <code>dotnet run</code>.</p>
+            </div>
+          </div>
+        </div>
+
+        <h2>Introducción a C#</h2>
+        <p>
+          <strong>C#</strong> es un lenguaje moderno, orientado a objetos y fuertemente tipado, usado en aplicaciones de escritorio, web y videojuegos (Unity).  
+          Permite crear programas robustos, con estructuras organizadas y reutilizables.
+        </p>
+
+        <h3>Hola Mundo</h3>
+        <div class="ejemplo">
+          <button class="code-copy" onclick="copyCode(this)">Copiar</button>
+          <pre><code>using System;
+
+class Program
+{
+    static void Main()
+    {
+        Console.WriteLine("¡Hola Mundo!");
+    }
+}</code></pre>
+        </div>
+
+        <div class="note">
+          <strong>Console.WriteLine()</strong> imprime texto en la consola.
+        </div>
+
+        <h2>Variables y Tipos de Datos</h2>
+        <p>Ejemplos de declaración de variables:</p>
+        <div class="ejemplo">
+          <button class="code-copy" onclick="copyCode(this)">Copiar</button>
+          <pre><code>int edad = 25;
+double precio = 19.99;
+string nombre = "Jorge";
+bool activo = true;</code></pre>
+        </div>
+
+        <div class="note">
+          💡 Cada variable tiene un tipo, y no puedes asignarle un valor de otro tipo directamente.
+        </div>
+
+        <h2>Estructuras de Control</h2>
+        <p>Condicionales y ciclos:</p>
+        <div class="ejemplo">
+          <button class="code-copy" onclick="copyCode(this)">Copiar</button>
+          <pre><code>if (edad >= 18)
+{
+    Console.WriteLine("Eres mayor de edad");
+}
+else
+{
+    Console.WriteLine("Eres menor de edad");
+}
+
+for (int i = 0; i &lt; 5; i++)
+{
+    Console.WriteLine("Número: " + i);
+}
+
+int j = 0;
+while(j &lt; 3)
+{
+    Console.WriteLine("Contador: " + j);
+    j++;
+}</code></pre>
+        </div>
+
+        <h2>Funciones (Métodos)</h2>
+        <p>Ejemplo de método simple:</p>
+        <div class="ejemplo">
+          <button class="code-copy" onclick="copyCode(this)">Copiar</button>
+          <pre><code>void Saludar(string nombre)
+{
+    Console.WriteLine("Hola, " + nombre);
+}
+
+// Uso:
+Saludar("Jorge");</code></pre>
+        </div>
+
+        <div class="note">
+          💡 Los métodos permiten organizar código en bloques reutilizables.
+        </div>
+
+        <h2>Programación Orientada a Objetos (POO)</h2>
+        <p>La POO permite modelar el mundo real con <strong>clases</strong> y <strong>objetos</strong>.</p>
+
+        <h3>Clases y Objetos</h3>
+        <div class="ejemplo">
+          <button class="code-copy" onclick="copyCode(this)">Copiar</button>
+          <pre><code>class Persona
+{
+    public string Nombre;
+    public int Edad;
+
+    public void Saludar()
+    {
+        Console.WriteLine("Hola, soy " + Nombre);
+    }
+}
+
+class Program
+{
+    static void Main()
+    {
+        Persona p = new Persona();
+        p.Nombre = "Jorge";
+        p.Edad = 25;
+        p.Saludar();
+    }
+}</code></pre>
+        </div>
+
+        <h3>Constructores</h3>
+        <p>Permiten inicializar un objeto al crearlo:</p>
+        <div class="ejemplo">
+          <button class="code-copy" onclick="copyCode(this)">Copiar</button>
+          <pre><code>class Persona
+{
+    public string Nombre;
+    public int Edad;
+
+    public Persona(string nombre, int edad)
+    {
+        Nombre = nombre;
+        Edad = edad;
+    }
+
+    public void Saludar()
+    {
+        Console.WriteLine("Hola, soy " + Nombre);
+    }
+}
+
+class Program
+{
+    static void Main()
+    {
+        Persona p = new Persona("Jorge", 25);
+        p.Saludar();
+    }
+}</code></pre>
+        </div>
+
+        <h3>Herencia</h3>
+        <p>Una clase puede heredar de otra:</p>
+        <div class="ejemplo">
+          <button class="code-copy" onclick="copyCode(this)">Copiar</button>
+          <pre><code>class Animal
+{
+    public string Nombre;
+
+    public void Comer()
+    {
+        Console.WriteLine(Nombre + " está comiendo");
+    }
+}
+
+class Perro : Animal
+{
+    public void Ladrar()
+    {
+        Console.WriteLine(Nombre + " dice: ¡Guau!");
+    }
+}
+
+class Program
+{
+    static void Main()
+    {
+        Perro miPerro = new Perro();
+        miPerro.Nombre = "Rex";
+        miPerro.Comer();
+        miPerro.Ladrar();
+    }
+}</code></pre>
+        </div>
+
+        <h3>Polimorfismo</h3>
+        <p>Permite que un método se comporte de manera diferente según la clase:</p>
+        <div class="ejemplo">
+          <button class="code-copy" onclick="copyCode(this)">Copiar</button>
+          <pre><code>class Animal
+{
+    public virtual void HacerSonido()
+    {
+        Console.WriteLine("Sonido genérico");
+    }
+}
+
+class Perro : Animal
+{
+    public override void HacerSonido()
+    {
+        Console.WriteLine("Guau!");
+    }
+}
+
+class Gato : Animal
+{
+    public override void HacerSonido()
+    {
+        Console.WriteLine("Miau!");
+    }
+}
+
+class Program
+{
+    static void Main()
+    {
+        Animal a1 = new Perro();
+        Animal a2 = new Gato();
+        a1.HacerSonido(); // Guau!
+        a2.HacerSonido(); // Miau!
+    }
+}</code></pre>
+        </div>
+
+        <h2>Ejercicios Prácticos</h2>
+        <div class="ejercicio">
+          🧩 <strong>Ejercicio 1:</strong>
+          <ul>
+            <li>Crea una clase <code>Vehiculo</code> con propiedades <code>Marca</code>, <code>Modelo</code> y <code>Año</code>.</li>
+            <li>Crea un constructor para inicializar estas propiedades.</li>
+            <li>Agrega un método <code>MostrarInfo()</code> que muestre la información del vehículo.</li>
+          </ul>
+          <button class="toggle-btn" onclick="toggleSolution(this)">Ver Solución</button>
+          <div class="toggle-content">
+            <pre><code>class Vehiculo
+{
+    public string Marca;
+    public string Modelo;
+    public int Año;
+
+    public Vehiculo(string marca, string modelo, int año)
+    {
+        Marca = marca;
+        Modelo = modelo;
+        Año = año;
+    }
+
+    public void MostrarInfo()
+    {
+        Console.WriteLine($"Vehículo: {Marca} {Modelo} ({Año})");
+    }
+}</code></pre>
+          </div>
+        </div>
+
+        <div class="ejercicio">
+          🧩 <strong>Ejercicio 2:</strong>
+          <ul>
+            <li>Crea una clase <code>Motocicleta</code> que herede de <code>Vehiculo</code> y agregue un método <code>HacerSonido()</code> que imprima "Vroom".</li>
+            <li>Prueba creando objetos de <code>Vehiculo</code> y <code>Motocicleta</code> e imprime su información y sonido.</li>
+          </ul>
+          <button class="toggle-btn" onclick="toggleSolution(this)">Ver Solución</button>
+          <div class="toggle-content">
+            <pre><code>class Motocicleta : Vehiculo
+{
+    public Motocicleta(string marca, string modelo, int año) 
+        : base(marca, modelo, año)
+    {
+    }
+
+    public void HacerSonido()
+    {
+        Console.WriteLine("Vroom!");
+    }
+}
+
+class Program
+{
+    static void Main()
+    {
+        Vehiculo v1 = new Vehiculo("Toyota", "Corolla", 2020);
+        Motocicleta m1 = new Motocicleta("Yamaha", "MT-07", 2021);
+        
+        v1.MostrarInfo();
+        m1.MostrarInfo();
+        m1.HacerSonido();
+    }
+}</code></pre>
+          </div>
+        </div>
+
+        <div class="ejercicio">
+          🧩 <strong>Ejercicio 3:</strong>
+          <ul>
+            <li>Agrega polimorfismo creando una clase base <code>Animal</code> con método virtual <code>HacerSonido()</code>.</li>
+            <li>Crea clases <code>Perro</code> y <code>Gato</code> que sobreescriban <code>HacerSonido()</code> con sonidos distintos.</li>
+            <li>Prueba creando objetos y llamando <code>HacerSonido()</code>.</li>
+          </ul>
+          <button class="toggle-btn" onclick="toggleSolution(this)">Ver Solución</button>
+          <div class="toggle-content">
+            <pre><code>class Animal
+{
+    public virtual void HacerSonido()
+    {
+        Console.WriteLine("Sonido genérico de animal");
+    }
+}
+
+class Perro : Animal
+{
+    public override void HacerSonido()
+    {
+        Console.WriteLine("Guau!");
+    }
+}
+
+class Gato : Animal
+{
+    public override void HacerSonido()
+    {
+        Console.WriteLine("Miau!");
+    }
+}
+
+class Program
+{
+    static void Main()
+    {
+        Animal[] animales = new Animal[3];
+        animales[0] = new Animal();
+        animales[1] = new Perro();
+        animales[2] = new Gato();
+        
+        foreach (Animal a in animales)
+        {
+            a.HacerSonido();
+        }
+    }
+}</code></pre>
+          </div>
+        </div>
+
+        <h2>Resumen</h2>
+        <ul>
+          <li>C# es un lenguaje fuertemente tipado y orientado a objetos.</li>
+          <li>Variables, condicionales y ciclos controlan la lógica del programa.</li>
+          <li>POO: clases, objetos, constructores, herencia y polimorfismo permiten código reutilizable y organizado.</li>
+        </ul>
+
+        <div class="nav-buttons">
+          <button onclick="scrollToTop()">⬆️ Volver arriba</button>
+          <button onclick="markAsCompleted()">✅ Marcar como completado</button>
+        </div>
+      </div>
+
+      <div class="sidebar">
+        <h3>Contenido</h3>
+        <ul>
+          <li><a href="#instalacion" class="active">Instalación de C#</a></li>
+          <li><a href="#introduccion">Introducción a C#</a></li>
+          <li><a href="#holamundo">Hola Mundo</a></li>
+          <li><a href="#variables">Variables y Tipos</a></li>
+          <li><a href="#control">Estructuras de Control</a></li>
+          <li><a href="#funciones">Funciones</a></li>
+          <li><a href="#poo">POO</a></li>
+          <li><a href="#clases">Clases y Objetos</a></li>
+          <li><a href="#constructores">Constructores</a></li>
+          <li><a href="#herencia">Herencia</a></li>
+          <li><a href="#polimorfismo">Polimorfismo</a></li>
+          <li><a href="#ejercicios">Ejercicios</a></li>
+          <li><a href="#resumen">Resumen</a></li>
+        </ul>
+        
+        <h3>Recursos Adicionales</h3>
+        <ul>
+          <li><a href="https://docs.microsoft.com/es-es/dotnet/csharp/" target="_blank">Documentación oficial</a></li>
+          <li><a href="https://dotnet.microsoft.com/learn/dotnet/hello-world-tutorial/intro" target="_blank">Tutorial .NET</a></li>
+          <li><a href="https://www.learncs.org/" target="_blank">LearnCS.org</a></li>
+        </ul>
+        
+        <h3>Progreso</h3>
+        <p id="progressText">0% completado</p>
+        <button onclick="resetProgress()">Reiniciar progreso</button>
+      </div>
+    </main>
+  </div>
+
+  <footer>
+    📘 Tutorial educativo: C# Básico y POO extendido — Jorge Padilla
+  </footer>
+
+  </body>
+</html>

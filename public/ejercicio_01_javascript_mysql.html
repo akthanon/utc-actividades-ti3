@@ -1,0 +1,481 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Guía Básica: Conectar JavaScript con MySQL (Node.js)</title>
+</head>
+<body style="font-family: Arial, sans-serif; margin: 40px; background-color: #fafafa; color: #333; line-height: 1.6;">
+
+  <header>
+    <h1 style="text-align:center; color:#2c3e50;">🖥️ Guía Básica: Conectar JavaScript con MySQL usando Node.js</h1>
+    <p style="text-align:center;">Aprende cómo conectar tu código JavaScript con bases de datos MySQL utilizando Node.js</p>
+    <hr>
+  </header>
+
+  <section>
+    <h2>📘 Introducción a JavaScript</h2>
+    <p>
+      <strong>JavaScript</strong> es uno de los lenguajes más usados en el desarrollo web moderno. 
+      Se ejecuta en el <strong>navegador</strong> para dar interactividad, pero también puede correr en el 
+      <strong>servidor</strong> gracias a <em>Node.js</em>.
+    </p>
+  </section>
+
+  <section>
+    <h2>💻 Ejemplos básicos de JavaScript</h2>
+
+    <h3>Ejemplo 1: Hola Mundo</h3>
+<pre style="background-color:#eee; padding:15px; border-radius:10px;">
+// En el navegador:
+console.log("¡Hola Mundo!");
+</pre>
+
+    <h3>Ejemplo 2: Condicionales</h3>
+<pre style="background-color:#eee; padding:15px; border-radius:10px;">
+let edad = 18;
+
+if (edad >= 18) {
+  console.log("Eres mayor de edad");
+} else {
+  console.log("Eres menor de edad");
+}
+</pre>
+
+    <h3>Ejemplo 3: Ciclos</h3>
+<pre style="background-color:#eee; padding:15px; border-radius:10px;">
+for (let i = 1; i <= 5; i++) {
+  console.log("Número: " + i);
+}
+</pre>
+
+    <p style="background-color:#eef; padding:10px; border-left:4px solid #4a90e2; border-radius:5px;">
+      📈 Ejecuta los 3 ejemplos anteriores enl navegador  
+      Para hacerlo, presiona <strong>ctrl+shift+i</strong> o presiona click derecho sobre cualquier ventana en el navegador.
+      Y haz click en la opción <strong>Inspeccionar Elemento</strong>.
+    </p>
+
+    <p style="background-color:#eef; padding:10px; border-left:4px solid #4a90e2; border-radius:5px;">
+      💡 En el navegador, JavaScript no puede conectarse directamente a bases de datos por seguridad.  
+      Para hacerlo, se utiliza <strong>Node.js</strong>.
+    </p>
+  </section>
+
+  <section>
+    <h2>⚙️ Instalación de Node.js en Windows</h2>
+    <ol>
+      <li>Visita <a href="https://nodejs.org" target="_blank">https://nodejs.org</a>.</li>
+      <li>Descarga la versión <strong>LTS (Long Term Support)</strong>.</li>
+      <li>Instálala dejando las opciones por defecto.</li>
+      <li>Abre la terminal (CMD o PowerShell) y ejecuta:</li>
+    </ol>
+<pre style="background-color:#eee; padding:15px; border-radius:10px;">
+node -v
+npm -v
+</pre>
+    <p>Si aparecen los números de versión, la instalación fue correcta.</p>
+  </section>
+<h2>⚙️Crear base de datos</h2>
+<p>Inicia tu interfaz de mysql de preferencia.</p>
+<h3>1️⃣ Crear la base de datos</h3>
+<p>Dentro de la terminal o la interfaz gráfica introduce lo siguiente</p>
+<pre style="background-color:#eee; padding:15px; border-radius:10px;">
+CREATE DATABASE base_de_datos;
+</pre>
+
+<h3>2️⃣ Usar la base de datos</h3>
+<pre style="background-color:#eee; padding:15px; border-radius:10px;">
+USE base_de_datos;
+</pre>
+
+<h3>3️⃣ Crear la tabla usuarios</h3>
+<pre style="background-color:#eee; padding:15px; border-radius:10px;">
+CREATE TABLE usuarios (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  nombre VARCHAR(50),
+  email VARCHAR(100),
+  password VARCHAR(255)
+);
+</pre>
+
+<h3>4️⃣ Insertar datos de prueba</h3>
+<pre style="background-color:#eee; padding:15px; border-radius:10px;">
+INSERT INTO usuarios (nombre, email, password)
+VALUES ('Gael', 'gael@artificial.htb', 'c99175974b6e192936d97224638a34f8'),
+       ('Mark', 'mark@artificial.htb', '0f3d8c76530022670f1c6029eed09ccb'),
+       ('Robert', 'robert@artificial.htb', 'hash_de_ejemplo');
+</pre>
+<h3>5️⃣ Consultar los datos</h3>
+<p>Prueba una consulta antes de pasar a Node.js</p>
+<pre style="background-color:#eee; padding:15px; border-radius:10px;">
+SELECT * FROM usuarios;
+</pre>
+  <section>
+    <h2>🔗 Conectarse a MySQL con Node.js</h2>
+    <p>
+      Con Node.js instalado, crearemos un pequeño proyecto para conectarnos a una base de datos MySQL.
+    </p>
+    <ol>
+      <li>Crea una carpeta llamada <code>proyecto_mysql</code>.</li>
+      <li>Entra en la carpeta y ejecuta estos comandos:</li>
+    </ol>
+<pre style="background-color:#eee; padding:15px; border-radius:10px;">
+npm init -y
+npm install mysql2
+</pre>
+
+<p>Crea el archivo de javascript directamente desde la terminal con el siguiente comando:</p>
+<pre style="background-color:#eee; padding:15px; border-radius:10px;">
+notepad db.js
+</pre>
+
+<h3>Ejemplo básico de conexión</h3>
+<pre style="background-color:#eee; padding:15px; border-radius:10px;">
+// archivo: db.js
+import mysql from 'mysql2';
+
+const conexion = mysql.createConnection({
+  host: 'localhost',
+  user: 'root',
+  password: 'toor',
+  database: 'base_de_datos'
+});
+
+conexion.connect(err => {
+  if (err) {
+    console.error('Error al conectar:', err);
+    return;
+  }
+  console.log('Conexión exitosa a MySQL');
+});
+
+conexion.query('SELECT * FROM usuarios', (err, resultados) => {
+  if (err) throw err;
+  console.log(resultados);
+});
+
+conexion.end();
+</pre>
+<p>Una vez creado el archivo inicia el programa con el siguiente comando:</p>
+<pre style="background-color:#eee; padding:15px; border-radius:10px;">
+node db.js
+</pre>
+
+<p>Si tienes un error de ejecución por <Strong>Permisos</Strong>  prueba intenta los siguientes comandos en powershell como administrador:</p>
+<pre style="background-color:#eee; padding:15px; border-radius:10px;">
+Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass
+Set-ExecutionPolicy RemoteSigned
+</pre>
+
+<p>Deberian tener una salida como la siguiente:
+</p><pre style="background-color:#DEFFDE; padding:15px; border-radius:10px;">
+Conexión exitosa a MySQL
+[
+  {
+    id: 1,
+    nombre: 'Gael',
+    email: 'gael@artificial.htb',
+    password: 'c99175974b6e192936d97224638a34f8'
+  },
+  {
+    id: 2,
+    nombre: 'Mark',
+    email: 'mark@artificial.htb',
+    password: '0f3d8c76530022670f1c6029eed09ccb'
+  },
+  {
+    id: 3,
+    nombre: 'Robert',
+    email: 'robert@artificial.htb',
+    password: 'hash_de_ejemplo'
+  }
+]
+</pre>
+
+<p>Si tienes algún error de ejecución por <Strong>import mysql2</Strong> prueba editando el archivo <Strong>package.json</Strong> y asegurate de que esta linea quede igual:</p>
+<pre style="background-color:#eee; padding:15px; border-radius:10px;">
+notepad package.json
+</pre>
+<pre style="background-color:#eee; padding:15px; border-radius:10px;">
+"type": "module"
+</pre>
+
+    <p style="background-color:#eef; padding:10px; border-left:4px solid #4a90e2; border-radius:5px;">
+      🔒 Nunca guardes contraseñas en el código visible del cliente.  
+      Las conexiones a bases de datos siempre deben hacerse desde el servidor.
+    </p>
+  </section>
+
+  <section>
+    <h2>🌐 Crear un backend con Express</h2>
+
+<p>
+  Primero crearemos otra carpeta llamada <strong>proyecto_express</strong>, para eso ejecutaremos los siguientes comandos.
+</p>
+
+<pre style="background-color:#eee; padding:15px; border-radius:10px;">
+#Para regresar a la ruta anterior
+cd .. 
+
+#Creamos la carpeta del proyecto
+mkdir proyecto_express 
+
+#Navegamos al proyecto
+cd .\proyecto_express\
+</pre>
+
+<p>
+  Usaremos el framework <strong>Express</strong> para crear una API que permita acceder a los datos desde el navegador y creamos el archivo del proyecto.
+</p>
+
+<pre style="background-color:#eee; padding:15px; border-radius:10px;">
+npm install express mysql2 cors
+
+notepad server.js
+</pre>
+
+<pre style="background-color:#eee; padding:15px; border-radius:10px;">
+// archivo: server.js
+
+// Importamos las librerías necesarias:
+// - express: para crear el servidor web.
+// - mysql2: para conectarnos a una base de datos MySQL.
+// - cors: para permitir peticiones desde otros orígenes (por ejemplo, desde tu archivo HTML local).
+import express from 'express';
+import mysql from 'mysql2';
+import cors from 'cors';
+
+// Creamos una instancia de Express (nuestro servidor web).
+const app = express();
+
+// Activamos CORS para que el navegador no bloquee las peticiones
+// que vienen desde otro dominio o puerto (como un HTML abierto en tu PC).
+app.use(cors());
+
+// Configuramos los datos de conexión a MySQL.
+const db = mysql.createConnection({
+  host: 'localhost',        // Dirección del servidor MySQL (local en este caso)
+  user: 'root',             // Usuario de la base de datos
+  password: 'toor', // Contraseña del usuario
+  database: 'base_de_datos' // Nombre de la base de datos que queremos usar
+});
+
+// Intentamos conectar a la base de datos MySQL.
+db.connect(err => {
+  if (err) {
+    console.error('Error de conexión:', err);
+    return; // Si hay error, detenemos aquí.
+  }
+  console.log('Conectado a MySQL'); // Si todo sale bien, mostramos un mensaje.
+});
+
+// Creamos una ruta GET en el servidor llamada "/usuarios".
+// Cuando alguien visita http://localhost:3000/usuarios,
+// se ejecutará esta función.
+app.get('/usuarios', (req, res) => {
+  // Hacemos una consulta SQL para obtener todos los registros de la tabla "usuarios".
+  db.query('SELECT * FROM usuarios', (err, results) => {
+    if (err) {
+      // Si ocurre un error en la consulta, lo mostramos en consola
+      // y respondemos al navegador con un error en formato JSON.
+      console.error('Error en consulta:', err);
+      res.status(500).json({ error: 'Error al consultar la base de datos' });
+      return;
+    }
+
+    // Si la consulta fue exitosa, enviamos los resultados al navegador en formato JSON.
+    res.json(results);
+  });
+});
+
+// Iniciamos el servidor en el puerto 3000.
+// Cuando esté listo, mostrará un mensaje en consola.
+app.listen(3000, () => console.log('Servidor activo en http://localhost:3000'));
+
+</pre>
+
+</pre>
+
+<p>Una vez creado el archivo inicia el programa con el siguiente comando:
+</p><pre style="background-color:#eee; padding:15px; border-radius:10px;">
+node server.js
+</pre>
+
+    <p style="background-color:#eef; padding:10px; border-left:4px solid #4a90e2; border-radius:5px;">
+      💡 En el navegador metete directamente a la ruta <a href="http://localhost:3000/usuarios" target="_blank">http://localhost:3000/usuarios</a> y observa lo que pasa .  
+    </p>
+
+  </section>
+
+  <section>
+    <h2>🧩 Consumir los datos desde una página web</h2>
+
+<p>
+  Crearemos un archivo <strong>HTML</strong> y creamos un servidor web simple.
+</p>
+
+<pre style="background-color:#eee; padding:15px; border-radius:10px;">
+cd .. 
+
+mkdir web_page
+
+cd .\web_page\
+
+notepad index.html
+</pre>
+
+    <p>
+      Ahora puedes mostrar los datos de la base de datos en una página HTML usando <code>fetch()</code>.
+    </p>
+<pre style="background-color:#eee; padding:15px; border-radius:10px;">
+// archivo: index.html
+&lt;!DOCTYPE html&gt;
+&lt;html lang="es"&gt;
+&lt;body&gt;
+  &lt;h1&gt;Lista de usuarios&lt;/h1&gt;
+  &lt;ul id="lista"&gt;&lt;/ul&gt; &lt;!-- Aquí se mostrará la lista de usuarios --&gt;
+
+  &lt;script&gt;
+    // Hacemos una solicitud al servidor local en el puerto 3000
+    fetch('http://localhost:8080/usuario')
+      // Convertimos la respuesta a formato JSON (arreglo de usuarios en la ruta /usuarios)
+      .then(r =&gt; r.json())
+      // Cuando los datos ya están listos, los mostramos en la página
+      .then(usuarios =&gt; 
+        // Insertamos dentro del &lt;ul&gt; un conjunto de &lt;li&gt; generados automáticamente
+        document.getElementById('lista').innerHTML = 
+          // .map() recorre cada usuario y genera una línea con su información
+          usuarios.map(u =&gt; `&lt;li&gt;${u.id} - ${u.nombre} (${u.correo})&lt;/li&gt;`).join('')
+      );
+  &lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</pre>
+  </section>
+<p>
+Servimos la pagina web simple con la IP en el puerto 80
+</p>
+<pre style="background-color:#eee; padding:15px; border-radius:10px;">
+npx serve -p 80
+</pre>
+
+    <p style="background-color:#eef; padding:10px; border-left:4px solid #4a90e2; border-radius:5px;">
+      💡 <Strong>Ejercicio:</Strong> El codigo html funciona mal aproposito, tu trabajo será encontrar los 3 errores manualmente y obtener como resultado al acceder al <strong>localhost</strong> en el navegador.  
+      </p>
+      <p style="background-color:#eef; padding:10px; border-left:4px solid #4a90e2; border-radius:5px;">
+      Para hacerlo, analiza la base de datos <strong>Mysql</strong> y presta atención detenidamente a los comentarios (Los comentarios están bien, el código es el que tiene los errores).
+      </p>
+      <p style="background-color:#eef; padding:10px; border-left:4px solid #4a90e2; border-radius:5px;">
+         Deberás tener una salida como la siguiente:
+      </p>
+    
+
+<figure style="
+  display: flex;
+  justify-content: center;
+  background-color: #f9f9f9;
+  padding: 15px;
+  border-radius: 28px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+  margin: 10px auto;
+  max-width: 300px;
+">
+  <img src="database.png" alt="Diagrama de base de datos" style="
+    width: 100%;
+    border-radius: 10px;
+  ">
+</figure>
+
+  <section>
+    <h2>📋 Resumen</h2>
+    <ul>
+      <li>JavaScript puede ejecutarse tanto en el navegador como en el servidor.</li>
+      <li><strong>Node.js</strong> permite usar JavaScript en el backend.</li>
+      <li>Desde Node.js puedes conectarte directamente a bases de datos como MySQL.</li>
+      <li>Desde el navegador, debes comunicarte con un backend seguro.</li>
+    </ul>
+  </section>
+
+<section>
+  <h2>📋 Notas Adicionales</h2>
+
+  <h3>🚀 ¿Qué es Express?</h3>
+  <p>
+    <strong>Express</strong> es un <em>framework</em> para <strong>Node.js</strong> que sirve para crear
+    servidores web fácilmente.  
+    Piensa en él como una herramienta que te permite decirle a tu programa:
+  </p>
+
+  <blockquote>
+    “Cuando alguien visite esta URL, responde con esto.”
+  </blockquote>
+
+  <p>Por ejemplo:</p>
+  <pre><code class="language-js">
+import express from 'express';
+const app = express();
+
+app.get('/', (req, res) => {
+  res.send('Hola desde el servidor!');
+});
+
+app.listen(3000, () => console.log('Servidor activo en http://localhost:3000'));
+</code></pre>
+
+  <hr>
+
+  <h3>🌐 ¿Qué es CORS?</h3>
+  <p>
+    <strong>CORS</strong> significa <em>Cross-Origin Resource Sharing</em>
+    (Compartición de recursos entre orígenes).
+  </p>
+
+  <h4>🔒 El problema:</h4>
+  <p>
+    Por seguridad, los navegadores bloquean las peticiones que vienen desde una página
+    (como tu HTML local) hacia otro dominio o puerto
+    (como tu servidor <code>http://localhost:3000</code>).
+  </p>
+
+  <p>Ejemplo:</p>
+  <ul>
+    <li>Tu HTML está en: <code>file:///D:/proyecto/index.html</code></li>
+    <li>Tu servidor Express está en: <code>http://localhost:3000</code></li>
+  </ul>
+
+  <p>
+    👉 El navegador los ve como <strong>diferentes orígenes</strong>, y bloquea el <code>fetch()</code>.
+  </p>
+
+  <h4>🔓 La solución:</h4>
+  <p>
+    El módulo <code>cors</code> (de <code>npm</code>) le dice a tu servidor Express:
+  </p>
+
+  <blockquote>
+    “Sí, permite peticiones desde otros orígenes.”
+  </blockquote>
+
+  <p>Solo añade estas líneas al inicio de tu servidor:</p>
+  <pre><code class="language-js">
+import cors from 'cors';
+app.use(cors());
+</code></pre>
+</section>
+
+
+  <section>
+    <h2>🏁 Conclusión</h2>
+    <p>
+      Con esta guía puedes crear un entorno completo con JavaScript y MySQL.  
+      Gracias a Node.js, puedes usar el mismo lenguaje tanto en el frontend como en el backend, 
+      facilitando el desarrollo de aplicaciones <strong>full-stack</strong>.
+    </p>
+  </section>
+
+  <footer style="margin-top:40px; text-align:center;">
+    <hr>
+    <p>📗 Guía creada para aprender a conectar JavaScript con MySQL usando Node.js — sin frameworks adicionales.</p>
+  </footer>
+
+</body>
+</html>

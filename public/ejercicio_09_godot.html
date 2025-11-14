@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Guía: Juego de Acción con Godot</title>
+  <style>
+    /* ESTILOS COPIADOS Y ADAPTADOS DE LA PRIMERA PÁGINA WEB 
+    */
+    
+    body {
+      font-family: Arial, sans-serif;
+      margin: 40px;
+      background-color: #fafafa;
+      color: #333;
+      line-height: 1.6;
+    }
+
+    header {
+      /* Agregamos un hr simulado como en el primer ejemplo */
+      border-bottom: 1px solid #ddd;
+      margin-bottom: 20px;
+    }
+
+    header h1 {
+      text-align: center;
+      color: #2c3e50;
+      font-size: 2em; /* Tamaño de h1 por defecto */
+    }
+
+    header p {
+      text-align: center;
+    }
+
+    /* Reseteamos el 'main' para que actúe como las 'section' del original */
+    main {
+      max-width: none;
+      margin: 0;
+      padding: 0;
+      background: none;
+      border-radius: 0;
+      box-shadow: none;
+    }
+
+    /* Reseteamos h2 y h3 para que tomen el estilo del body */
+    h2 {
+      color: inherit;
+      border-left: none;
+      padding-left: 0;
+    }
+    
+    h3 {
+      color: inherit;
+    }
+
+    /* Estilo para bloques de código (pre) */
+    pre {
+      background-color: #eee;
+      padding: 15px;
+      border-radius: 10px;
+      overflow-x: auto; /* Buena práctica mantenida */
+    }
+
+    /* Reseteamos el 'code' para que se vea simple dentro de 'pre' */
+    code {
+      color: inherit;
+      font-weight: normal;
+    }
+    
+    /* Reseteamos la clase .ejemplo que contenía el 'pre' */
+    .ejemplo {
+       background: none;
+       border-left: none;
+       padding: 0;
+       border-radius: 0;
+       margin: 20px 0;
+    }
+
+    /* Estilo para notas especiales (como el párrafo azul del original)
+      Lo aplicamos a .note y .ejercicio para unificar
+    */
+    .note,
+    .ejercicio {
+      background-color: #eef;
+      padding: 10px;
+      border-left: 4px solid #4a90e2;
+      border-radius: 5px;
+      margin: 20px 0;
+    }
+
+    a {
+      color: #4a90e2; /* Usamos el azul de las notas para consistencia */
+    }
+
+    ul {
+      /* Margen por defecto para listas */
+      margin-left: 25px; 
+    }
+
+    footer {
+      margin-top: 40px;
+      text-align: center;
+      /* Agregamos un hr simulado como en el primer ejemplo */
+      border-top: 1px solid #ddd;
+      padding-top: 20px;
+    }
+
+    /* El botón no se usa, pero lo eliminamos por limpieza */
+    button {
+      display: none;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Guía: Juego de Acción con Godot</h1>
+    <p>Aprende a crear un juego de acción sencillo paso a paso</p>
+  </header>
+
+  <main>
+    <h2>¿Qué es Godot?</h2>
+    <p>
+      <strong>Godot</strong> es un motor de videojuegos libre y gratuito que permite crear juegos 2D y 3D.  
+      Ofrece un entorno visual y un lenguaje de scripting propio llamado <strong>GDScript</strong>, muy similar a Python.
+    </p>
+
+    <h2>Instalación de Godot</h2>
+    <ul>
+      <li>Descarga Godot desde <a href="https://godotengine.org/download" target="_blank">su página oficial</a>.</li>
+      <li>Extrae el archivo y ejecuta el ejecutable; no necesita instalación.</li>
+      <li>Abre Godot y crea un proyecto nuevo, por ejemplo: <code>JuegoAccion</code>.</li>
+    </ul>
+
+    <h2>Escena principal</h2>
+    <p>En Godot, todo se organiza en escenas y nodos:</p>
+    <ul>
+      <li>Crea un nodo <code>Node2D</code> como raíz de tu escena.</li>
+      <li>Agrega un <code>Sprite</code> para el jugador y otro para enemigos o elementos.</li>
+      <li>Agrega un <code>CollisionShape2D</code> para manejar colisiones.</li>
+    </ul>
+
+    <h2>Movimiento del jugador</h2>
+    <div class="ejemplo">
+      <pre><code># player.gd
+extends KinematicBody2D
+
+var velocidad = 200
+
+func _physics_process(delta):
+    var movimiento = Vector2.ZERO
+    if Input.is_action_pressed("ui_right"):
+        movimiento.x += 1
+    if Input.is_action_pressed("ui_left"):
+        movimiento.x -= 1
+    if Input.is_action_pressed("ui_down"):
+        movimiento.y += 1
+    if Input.is_action_pressed("ui_up"):
+        movimiento.y -= 1
+
+    movimiento = movimiento.normalized() * velocidad
+    move_and_slide(movimiento)</code></pre>
+    </div>
+
+    <div class="note">
+      📌 Asegúrate de configurar las acciones <code>ui_up</code>, <code>ui_down</code>, <code>ui_left</code>, <code>ui_right</code> en el Input Map de Godot.
+    </div>
+
+    <h2>Agregar enemigos y colisiones</h2>
+    <p>Para enemigos, puedes usar <code>Area2D</code> y detectar colisiones con el jugador:</p>
+    <div class="ejemplo">
+      <pre><code># enemigo.gd
+extends Area2D
+
+func _on_Enemy_body_entered(body):
+    if body.name == "Jugador":
+        print("¡Golpeado!")</code></pre>
+    </div>
+
+    <h2>Ejercicio práctico</h2>
+    <div class="ejercicio">
+      🕹️ <strong>Ejercicio:</strong>
+      <ul>
+        <li>Crea un proyecto nuevo en Godot llamado <code>JuegoAccion</code>.</li>
+        <li>Agrega un <code>Node2D</code> como escena principal.</li>
+        <li>Crea un jugador con <code>Sprite</code> y <code>KinematicBody2D</code> que se mueva con las flechas.</li>
+        <li>Agrega al menos un enemigo con <code>Area2D</code> que detecte colisiones con el jugador.</li>
+        <li>Imprime un mensaje en la consola cuando el jugador toque al enemigo.</li>
+      </ul>
+    </div>
+
+    <h2>Resumen</h2>
+    <ul>
+      <li>Godot organiza todo en escenas y nodos.</li>
+      <li>GDScript permite controlar movimientos, colisiones y lógica del juego.</li>
+      <li>Input Map facilita la captura de teclas y acciones del jugador.</li>
+      <li>Las colisiones permiten detectar interacciones entre jugadores, enemigos y objetos.</li>
+    </ul>
+
+    <h2>Conclusión</h2>
+    <p>
+      Con esta guía tienes una base para un juego de acción simple: movimiento del jugador, enemigos y colisiones.  
+      Puedes expandirlo agregando disparos, puntuaciones, animaciones y niveles.
+    </p>
+  </main>
+
+  <footer>
+    📘 Tutorial educativo: Creando juegos de acción con Godot — Jorge Padilla
+  </footer>
+</body>
+</html>

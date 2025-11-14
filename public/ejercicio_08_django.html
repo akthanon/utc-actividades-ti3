@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Guía: Página Web con Python Django</title>
+</head>
+<body style="font-family: Arial, sans-serif; margin: 40px; background-color: #fafafa; color: #333; line-height: 1.6;">
+
+  <header>
+    <h1 style="text-align:center; color:#2c3e50;">🐍 Guía: Página Web con Python Django</h1>
+    <p style="text-align:center;">Crea una página web completa usando Python y Django</p>
+    <hr>
+  </header>
+
+  <main>
+    <h2>¿Qué es Django?</h2>
+    <p>
+      <strong>Django</strong> es un framework web de Python que permite crear aplicaciones web completas y escalables de manera rápida.  
+      Incluye manejo de rutas, bases de datos, plantillas HTML, autenticación y más.
+    </p>
+
+    <h2>Instalación de Django</h2>
+    <p>1. Asegúrate de tener Python instalado. Luego crea un entorno virtual:</p>
+<pre style="background-color:#f3f1e0; padding:15px; border-radius:10px;">
+python -m venv venv
+source venv/bin/activate  # Linux/Mac
+venv\Scripts\activate     # Windows
+</pre>
+    <p>2. Instala Django:</p>
+<pre style="background-color:#f3f1e0; padding:15px; border-radius:10px;">
+pip install django
+</pre>
+
+    <h2>Crear un proyecto Django</h2>
+<pre style="background-color:#f3f1e0; padding:15px; border-radius:10px;">
+django-admin startproject mi_web
+cd mi_web
+python manage.py runserver
+</pre>
+    
+    <p style="background-color:#eef; padding:10px; border-left:4px solid #4a90e2; border-radius:5px;">
+      💡 Esto iniciará un servidor local en <code>http://127.0.0.1:8000/</code>
+    </p>
+
+    <h2>Crear una aplicación</h2>
+<pre style="background-color:#eee; padding:15px; border-radius:10px;">
+python manage.py startapp usuarios
+</pre>
+    <p>Luego registra la app en <code>settings.py</code>:</p>
+<pre style="background-color:#f3f1e0; padding:15px; border-radius:10px;">
+INSTALLED_APPS = [
+    ...
+    'usuarios',
+]
+</pre>
+
+    <h2>Definir un modelo de base de datos</h2>
+<pre style="background-color:#f3f1e0; padding:15px; border-radius:10px;">
+from django.db import models
+
+class Usuario(models.Model):
+    nombre = models.CharField(max_length=50)
+    email = models.EmailField()
+
+    def __str__(self):
+        return self.nombre
+</pre>
+
+    <p>Luego migra los cambios:</p>
+<pre style="background-color:#eee; padding:15px; border-radius:10px;">
+python manage.py makemigrations
+python manage.py migrate
+</pre>
+
+    <h2>Crear vistas y rutas</h2>
+<pre style="background-color:#f3f1e0; padding:15px; border-radius:10px;">
+from django.shortcuts import render
+from .models import Usuario
+
+def inicio(request):
+    usuarios = Usuario.objects.all()
+    return render(request, 'inicio.html', {'usuarios': usuarios})
+</pre>
+
+    <p>Configura la ruta en <code>urls.py</code>:</p>
+<pre style="background-color:#f3f1e0; padding:15px; border-radius:10px;">
+from django.urls import path
+from usuarios import views
+
+urlpatterns = [
+    path('', views.inicio, name='inicio'),
+]
+</pre>
+
+    <h2>Plantilla HTML</h2>
+<pre style="background-color:#f3f1e0; padding:15px; border-radius:10px;">
+&lt;!-- templates/inicio.html --&gt;
+&lt;h1&gt;Lista de Usuarios&lt;/h1&gt;
+&lt;ul&gt;
+  {% for u in usuarios %}
+    &lt;li&gt;{{ u.nombre }} - {{ u.email }}&lt;/li&gt;
+  {% endfor %}
+&lt;/ul&gt;
+</pre>
+
+    <div style="background-color:#eef; padding:10px; border-left:4px solid #4a90e2; border-radius:5px;">
+      <h2>🧩 Ejercicio práctico</h2>
+      <ul>
+        <li>Crea un proyecto Django y una app llamada <code>usuarios</code>.</li>
+        <li>Define un modelo <code>Usuario</code> con nombre y email.</li>
+        <li>Crea una vista que muestre todos los usuarios en una plantilla HTML.</li>
+        <li>Agrega 2-3 usuarios mediante el admin o shell y verifica que aparecen en la página.</li>
+      </ul>
+    </div>
+
+    <h2>Resumen</h2>
+    <ul>
+      <li>Django permite crear aplicaciones web completas con Python.</li>
+      <li>Se manejan rutas, vistas, plantillas y bases de datos con facilidad.</li>
+      <li>Los modelos representan tablas en la base de datos y se migran automáticamente.</li>
+      <li>Las plantillas HTML permiten mostrar datos dinámicos.</li>
+    </ul>
+
+    <h2>Conclusión</h2>
+    <p>
+      Con Django puedes construir páginas web completas y escalables.  
+      Este ejemplo básico sirve como base para agregar autenticación, formularios y otras funcionalidades avanzadas.
+    </p>
+  </main>
+
+  <footer style="margin-top:40px; text-align:center;">
+    <hr>
+    <p>📘 Tutorial educativo: Creando páginas web con Python Django — Jorge Padilla</p>
+  </footer>

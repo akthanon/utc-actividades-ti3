@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ejercicio 07 — Examen: Página Web Completa con Node.js y MySQL</title>
+  <style>
+    body{font-family: Inter, Arial, sans-serif; margin:24px; background:#fbfdff; color:#1f2937}
+    header{display:flex;gap:16px;align-items:center}
+    h1{color:#000;margin:0}
+    .card{background:#fff;border-radius:12px;padding:18px;margin:14px 0;box-shadow:0 6px 18px rgba(15,23,42,0.06)}
+    pre{background:#f3f4f6;padding:12px;border-radius:8px;overflow:auto}
+    code{font-family:Consolas,monospace}
+    .hint{background:#eef6ff;border-left:4px solid #0b5cff;padding:10px;border-radius:6px}
+    footer{margin-top:20px;text-align:center;color:#64748b}
+    ol li{margin:8px 0}
+    .tasks{display:grid;grid-template-columns:1fr;gap:12px}
+    .rubric td, .rubric th{padding:8px;border:1px solid #e6eef8}
+    .rubric{border-collapse:collapse;width:100%;background:#fff}
+  </style>
+</head>
+<body>
+  <header>
+    <h1>📝 Ejercicio 07 — Examen: Página Web Completa con Node.js y MySQL</h1>
+  </header>
+
+  <section class="card">
+    <h2>Descripción general</h2>
+    <p>Este examen práctico evaluará tu capacidad para construir una aplicación web <strong>full-stack</strong> que use <strong>Node.js</strong>, <strong>Express</strong> y <strong>MySQL</strong>, y que consuma esa API desde una interfaz HTML/JavaScript. Basado en el Ejercicio 01, ahora deberás crear una página más elaborada con funcionalidades CRUD, validación, y una pequeña autenticación simétrica (sin bibliotecas externas para autenticación — usa conceptos básicos).</p>
+
+    <p>Entrega: un repositorio (o carpeta) con <code>server.js</code> (o archivos equivalentes), <code>package.json</code>, scripts SQL para crear la base de datos, y la carpeta <code>public/</code> con los archivos HTML/CSS/JS listos para ser servidos.</p>
+
+    <p><strong>Tiempo recomendado:</strong> 2–3 horas</p>
+  </section>
+
+  <section class="card">
+    <h2>Objetivos que se evaluarán</h2>
+    <ul>
+      <li>Configurar MySQL y diseñar la tabla correcta.</li>
+      <li>Implementar un backend en Node.js/Express con rutas RESTful.</li>
+      <li>Crear frontend que consuma la API con <code>fetch()</code>.</li>
+      <li>Validación de datos en cliente y servidor.</li>
+      <li>Leer/Mostrar/Crear/Actualizar/Eliminar usuarios (CRUD).</li>
+      <li>Implementar bloqueo básico de rutas (simulación de autenticación).</li>
+      <li>Buenas prácticas: manejo de errores, variables de entorno, seguridad mínima.</li>
+    </ul>
+  </section>
+
+  <section class="card">
+    <h2>Instrucciones paso a paso</h2>
+    <ol>
+      <li><strong>Preparar la base de datos</strong>
+        <ol>
+          <li>Crear base de datos llamada <code>examen_web</code>.</li>
+          <li>Ejecutar el script SQL <code>sql/01_schema.sql</code> que contenga la tabla <code>usuarios</code> con los campos:
+            <ul>
+              <li><code>id</code> INT AUTO_INCREMENT PK</li>
+              <li><code>nombre</code> VARCHAR(100) NOT NULL</li>
+              <li><code>email</code> VARCHAR(150) UNIQUE NOT NULL</li>
+              <li><code>password</code> VARCHAR(255) NOT NULL</li>
+              <li><code>created_at</code> TIMESTAMP DEFAULT CURRENT_TIMESTAMP</li>
+            </ul>
+          </li>
+          <li>Agregar 3 registros de prueba (puedes usar contraseñas sin encriptar para el examen práctico).</li>
+        </ol>
+      </li>
+
+      <li><strong>Inicializar el proyecto Node.js</strong>
+        <pre>npm init -y
+npm install express mysql2 cors dotenv</pre>
+        Crea un archivo <code>.env</code> con estas variables (no subir en repos públicos):
+        <pre>DB_HOST=localhost
+DB_USER=root
+DB_PASS=toor
+DB_NAME=examen_web
+PORT=3000
+SECRET_KEY=mi_clave_secreta_simple</pre>
+      </li>
+
+      <li><strong>Crear <code>server.js</code></strong>
+        <p>Requisitos mínimos del servidor:</p>
+        <ul>
+          <li>Conexión a MySQL usando <code>mysql2</code>.</li>
+          <li>Rutas RESTful para usuarios:</li>
+          <pre>GET /api/usuarios        -- listar usuarios
+GET /api/usuarios/:id     -- obtener usuario
+POST /api/usuarios        -- crear usuario
+PUT /api/usuarios/:id     -- actualizar usuario
+DELETE /api/usuarios/:id  -- eliminar usuario</pre>
+          <li>Rutas de autenticación mínima (simulada):</li>
+          <pre>POST /auth/login  -- recibe {email,password} y devuelve token simple (ej: token = btoa(email + ':' + SECRET_KEY))
+GET /auth/check     -- requiere token en header x-token y retorna ok/denegado</pre>
+          <li>Asegúrate de usar <code>app.use(express.json())</code> y <code>cors()</code>.</li>
+        </ul>
+      </li>
+
+      <li><strong>Crear la carpeta <code>public/</code> con la interfaz</strong>
+        <p>Archivos mínimos:</p>
+        <ul>
+          <li><code>index.html</code> — Página principal que muestra la lista de usuarios.</li>
+          <li><code>usuario.html</code> — Formulario para crear/editar un usuario.</li>
+          <li><code>app.js</code> — Lógica del frontend con <code>fetch()</code>.</li>
+          <li><code>styles.css</code> — Estilos mínimos (puedes basarte en Ejercicio 01).</li>
+        </ul>
+
+        <p>Requisitos funcionales para frontend:</p>
+        <ol>
+          <li>Mostrar lista de usuarios en una tabla con columnas: ID, Nombre, Email, Fecha de creación, Acciones (Editar, Eliminar).</li>
+          <li>Botón "Nuevo usuario" que abre <code>usuario.html</code> o muestra un formulario modal.</li>
+          <li>Validar campos (nombre > 2 letras, email con @, password >= 6 chars).</li>
+          <li>Al crear o actualizar, enviar petición correspondiente al backend y refrescar la lista sin recargar la página.</li>
+          <li>Eliminar con confirmación.</li>
+          <li>Implementar login mínimo: formulario que solicita email y password, obtiene token y lo guarda en <code>localStorage</code>. Rutas protegidas del frontend deben solicitar token para acceder.</li>
+        </ol>
+      </li>
+
+      <li><strong>Pruebas</strong>
+        <p>Demuestra que todas las rutas funcionan usando <code>curl</code> o el cliente que prefieras. Incluye un archivo <code>PRUEBAS.md</code> con comandos de ejemplo y capturas (o salidas) esperadas.</p>
+      </li>
+
+      <li><strong>Entregar</strong>
+        <p>Empaqueta la carpeta como zip o sube a repositorio publico en github y comparte el enlace. Debe incluir:</p>
+        <ul>
+          <li><code>server.js</code>, <code>package.json</code>, <code>.env.example</code></li>
+          <li>Carpeta <code>public/</code> con frontend</li>
+          <li>Carpeta <code>sql/</code> con script de creación y datos de prueba</li>
+          <li><code>PRUEBAS.md</code> con comandos de test</li>
+        </ul>
+      </li>
+    </ol>
+  </section>
+
+  <section class="card">
+    <h2>Tareas del examen (lo que debe realizar el alumno)</h2>
+    <div class="tasks">
+      <div>
+        <strong>Tarea A (30 pts) — Base de datos y esquema</strong>
+        <p>Crear la base de datos y la tabla con constraints correctos y 3 registros de ejemplo.</p>
+      </div>
+
+      <div>
+        <strong>Tarea B (30 pts) — Backend REST</strong>
+        <p>Implementar las rutas CRUD + autenticación mínima y manejo de errores. El servidor debe devolver códigos HTTP apropiados.</p>
+      </div>
+
+      <div>
+        <strong>Tarea C (25 pts) — Frontend</strong>
+        <p>Interfaz que consuma la API, validaciones, interacción sin recargar la página.</p>
+      </div>
+
+      <div>
+        <strong>Tarea D (15 pts) — Documentación y pruebas</strong>
+        <p>Incluir <code>PRUEBAS.md</code>, instrucciones de arranque y un video corto (opcional) mostrando la app funcionando.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="card">
+    <h2>Rubrica de calificación (sugerida)</h2>
+    <table class="rubric">
+      <thead>
+        <tr><th>Criterio</th><th>Puntos</th><th>Observaciones</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>Esquema SQL correcto</td><td>30</td><td>Constraints y datos de prueba</td></tr>
+        <tr><td>Rutas REST y manejo de errores</td><td>30</td><td>Códigos HTTP y mensajes claros</td></tr>
+        <tr><td>Frontend funcional (CRUD)</td><td>25</td><td>UX mínima y validaciones</td></tr>
+        <tr><td>Documentación y pruebas</td><td>15</td><td>Comandos y README claro</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <section class="card">
+    <h2>Ejemplos / Pistas (no entregar como solución)</h2>
+    <p>Fragmento de conexión a MySQL (server.js):</p>
+    <pre><code>// ejemplo de conexión
+import mysql from 'mysql2';
+import dotenv from 'dotenv';
+dotenv.config();
+
+const db = mysql.createConnection({
+  host: process.env.DB_HOST,
+  user: process.env.DB_USER,
+  password: process.env.DB_PASS,
+  database: process.env.DB_NAME
+});
+
+db.connect(err =&gt; {
+  if(err) return console.error('Error BD', err);
+  console.log('Conectado a MySQL');
+});
+</code></pre>
+
+    <p>Ejemplo básico de token simple (no seguro, solo para examen):</p>
+    <pre><code>// login -> generar token simple
+function makeToken(email){
+  const token = Buffer.from(email + ':' + process.env.SECRET_KEY).toString('base64');
+  return token;
+}
+</code></pre>
+
+    <div class="hint">
+      <strong>Pista:</strong> Usa <code>db.promise()</code> de mysql2 si prefieres trabajar con <code>async/await</code>.
+    </div>
+  </section>
+
+  <section class="card">
+    <h2>Errores intencionales (evaluación práctica)</h2>
+    <p>Para comprobar tu capacidad de debugging, el examinador puede introducir 2 errores deliberados en una copia de tu servidor y pedirte que los arregles en 20 minutos. Familiarízate con:</p>
+    <ul>
+      <li>Manejo de errores de conexión a MySQL.</li>
+      <li>Respuestas JSON malformadas.</li>
+      <li>Problemas CORS al servir el frontend desde otra ruta/puerto.</li>
+    </ul>
+  </section>
+
+  <section class="card">
+    <h2>Comandos útiles</h2>
+    <pre># Ejecutar servidor
+node server.js
+
+# Ejecutar pruebas rápidas con curl
+curl http://localhost:3000/api/usuarios
+
+# Crear usuario (ejemplo)
+curl -X POST http://localhost:3000/api/usuarios -H "Content-Type: application/json" -d '{"nombre":"Alfa","email":"alfa@example.com","password":"123456"}'
+</pre>
+  </section>
+
+  <footer>
+    <p>Buen examen — ¡mucha suerte! Si quieres, puedo generar también la solución completa (servidor + frontend) o un conjunto de tests automáticos para calificar — dime cuál prefieres.</p>
+  </footer>
+
+</body>
+</html>

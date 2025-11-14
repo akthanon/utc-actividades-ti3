@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tutorial de Pygame: Crea tu Primer Juego en Python</title>
+</head>
+<body style="font-family: Arial, sans-serif; margin: 40px; background-color: #fafafa; color: #333; line-height: 1.6;">
+
+  <header>
+    <h1 style="text-align:center; color:#2c3e50;">🎮 Tutorial de Pygame: Crea tu Primer Juego en Python</h1>
+    <p style="text-align:center;">Aprende a crear videojuegos en Python con la biblioteca Pygame.</p>
+    <hr>
+  </header>
+
+  <section>
+    <h2>¿Qué es Pygame?</h2>
+    <p>
+      <b>Pygame</b> es una biblioteca de Python que permite crear videojuegos de forma sencilla.
+      Proporciona funciones para manejar gráficos, sonido, eventos de teclado y ratón, y animaciones.
+    </p>
+    <p>
+      Es ideal para principiantes que quieren aprender sobre programación de videojuegos sin entrar
+      en la complejidad de motores grandes como Unity o Unreal.
+    </p>
+  </section>
+
+  <section>
+    <h2>Instalación de Pygame</h2>
+    <p>Antes de comenzar, asegúrate de tener Python instalado. Luego, abre una terminal o consola y ejecuta:</p>
+<pre style="background-color:#f3f1e0; padding:15px; border-radius:10px;">
+pip install pygame
+</pre>
+    <p>Esto descargará e instalará la biblioteca automáticamente.</p>
+  </section>
+
+  <section>
+    <h2>Estructura básica de un programa con Pygame</h2>
+    <p>Todo juego hecho con Pygame sigue una estructura similar:</p>
+    <ul>
+      <li>Inicialización de la ventana.</li>
+      <li>Bucle principal del juego.</li>
+      <li>Detección de eventos (como presionar teclas o cerrar la ventana).</li>
+      <li>Actualización de la pantalla.</li>
+    </ul>
+
+<pre style="background-color:#f3f1e0; padding:15px; border-radius:10px;">
+import pygame
+pygame.init()
+
+# Crear ventana
+ventana = pygame.display.set_mode((500, 400))
+pygame.display.set_caption("Mi primer juego con Pygame")
+
+# Bucle principal
+ejecutando = True
+while ejecutando:
+    for evento in pygame.event.get():
+        if evento.type == pygame.QUIT:
+            ejecutando = False
+
+    ventana.fill((0, 0, 0))  # Fondo negro
+    pygame.display.update()   # Actualiza la pantalla
+
+pygame.quit()
+</pre>
+
+    <p>
+      Este programa crea una ventana negra que se puede cerrar con la “X”. Es el esqueleto de cualquier juego.
+    </p>
+  </section>
+
+  <section>
+    <h2>Dibujar y mover objetos</h2>
+    <p>Pygame permite dibujar formas simples, como rectángulos y círculos, que podemos usar como jugadores u objetos.</p>
+<pre style="background-color:#f3f1e0; padding:15px; border-radius:10px;">
+import pygame
+pygame.init()
+
+# Ventana
+ventana = pygame.display.set_mode((500, 400))
+pygame.display.set_caption("Movimiento básico")
+
+# Jugador
+x, y = 230, 180
+velocidad = 5
+
+ejecutando = True
+while ejecutando:
+    for evento in pygame.event.get():
+        if evento.type == pygame.QUIT:
+            ejecutando = False
+
+    # Detectar teclas
+    teclas = pygame.key.get_pressed()
+    if teclas[pygame.K_LEFT]:
+        x -= velocidad
+    if teclas[pygame.K_RIGHT]:
+        x += velocidad
+    if teclas[pygame.K_UP]:
+        y -= velocidad
+    if teclas[pygame.K_DOWN]:
+        y += velocidad
+
+    ventana.fill((0, 0, 0))
+    pygame.draw.rect(ventana, (255, 0, 0), (x, y, 40, 40))
+    pygame.display.update()
+
+pygame.quit()
+</pre>
+
+    <p>
+      Ahora el cuadrado rojo se mueve con las flechas del teclado. Es un excelente punto de partida para crear un juego simple.
+    </p>
+  </section>
+
+  <section>
+    <h2>💪 Ejercicio práctico</h2>
+    <p>
+      A partir del código anterior, utilizando la POO modifica la plantilla para añadir más elementos y mecánicas simples. Por ejemplo:
+    </p>
+    <ul>
+      <li>Añadir un enemigo o un obstáculo (otro rectángulo de diferente color).</li>
+      <li>Detectar colisiones con el enemigo.</li>
+      <li>Disparar proyectiles.</li>
+    </ul>
+        <p style="background-color:#f3f1e0; padding:10px; border-left:4px solid #4a90e2; border-radius:5px;">
+      💡 <b>Consejo:</b> Experimenta con diferentes tamaños de ventana, colores y velocidades.
+      Puedes incluso añadir una imagen en lugar del rectángulo para el jugador.
+    </p>
+  </section>
+
+  <section>
+    <h2>Conclusión</h2>
+    <p>
+      Pygame es una excelente herramienta para aprender los fundamentos de los videojuegos.
+      Con unas pocas líneas de código puedes crear animaciones, detectar colisiones y añadir lógica básica.
+      Una vez que domines lo esencial, podrás pasar a proyectos más avanzados con gráficos, sonido y niveles.
+    </p>
+  </section>
+
+
+  <footer style="margin-top:40px; text-align:center;">
+    <hr>
+    <p>🐍 Guía creada para aprender los fundamentos de Pygame en Python.</p>
+  </footer>
+
+</body>
+</html>

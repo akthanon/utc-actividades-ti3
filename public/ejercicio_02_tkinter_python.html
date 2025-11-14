@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Tutorial Básico de Tkinter en Python</title>
+</head>
+<body style="font-family: Arial, sans-serif; margin: 40px; line-height: 1.6; background-color: #f9f9f9; color: #333;">
+
+  <header>
+    <h1 style="text-align:center; color:#2c3e50;">🐍 Tutorial Básico de Tkinter en Python</h1>
+    <p style="text-align:center;">Aprende a crear interfaces gráficas simples con Python y la biblioteca Tkinter</p>
+    <hr>
+  </header>
+
+  <section>
+    <h2>💡 ¿Qué es Tkinter?</h2>
+    <p>
+      <strong>Tkinter</strong> es el módulo estándar de Python para crear interfaces gráficas de usuario (GUI).
+      Viene incluido con la mayoría de las instalaciones de Python, por lo que no necesitas instalar nada adicional.
+      Con Tkinter puedes crear ventanas, botones, etiquetas, cuadros de texto y más.
+    </p>
+  </section>
+
+  <section>
+    <h2>📦 Comprobando si Tkinter está disponible</h2>
+    <p>
+      Para asegurarte de que Tkinter esté instalado, puedes ejecutar el siguiente comando en una terminal o consola de Python:
+    </p>
+<pre style="background-color:#f3f1e0; padding:15px; border-radius:10px;">
+python -m tkinter
+</pre>
+    <p>
+      Si Tkinter está instalado, se abrirá una pequeña ventana vacía con información de la versión.  
+      Si da error, puedes instalarlo (en sistemas basados en Debian/Ubuntu) con:
+    </p>
+<pre style="background-color:#f3f1e0; padding:15px; border-radius:10px;">
+sudo apt install python3-tk
+</pre>
+  </section>
+
+  <section>
+    <h2>👋 Tu primera ventana con Tkinter</h2>
+    <p>Este es el ejemplo más básico para crear una ventana vacía:</p>
+
+<pre style="background-color:#f3f1e0; padding:15px; border-radius:10px;">
+import tkinter as tk
+
+# Crear la ventana principal
+ventana = tk.Tk()
+ventana.title("Mi primera ventana")
+
+# Mostrar la ventana
+ventana.mainloop()
+</pre>
+
+    <p>
+      <strong>Explicación:</strong>
+      <ul>
+        <li><code>tk.Tk()</code> crea la ventana principal.</li>
+        <li><code>title()</code> define el texto de la barra de título.</li>
+        <li><code>mainloop()</code> mantiene la ventana abierta hasta que el usuario la cierre.</li>
+      </ul>
+    </p>
+  </section>
+
+  <section>
+    <h2>🧱 Añadiendo elementos (widgets)</h2>
+    <p>
+      Los <strong>widgets</strong> son los componentes gráficos que puedes agregar a una ventana:
+      etiquetas, botones, cuadros de texto, etc.
+    </p>
+
+    <h3>Ejemplo con una etiqueta y un botón</h3>
+<pre style="background-color:#f3f1e0; padding:15px; border-radius:10px;">
+import tkinter as tk
+
+ventana = tk.Tk()
+ventana.title("Ejemplo con botón")
+
+# Crear una etiqueta
+etiqueta = tk.Label(ventana, text="¡Hola desde Tkinter!")
+etiqueta.pack()  # Empaqueta la etiqueta dentro de la ventana
+
+# Crear un botón
+boton = tk.Button(ventana, text="Cerrar", command=ventana.destroy)
+boton.pack()
+
+ventana.mainloop()
+</pre>
+
+    <ul>
+      <li><code>Label</code>: muestra texto dentro de la ventana.</li>
+      <li><code>Button</code>: crea un botón con texto.</li>
+      <li><code>command=ventana.destroy</code>: cierra la ventana cuando se hace clic.</li>
+      <li><code>pack()</code>: coloca el widget dentro de la ventana automáticamente.</li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>✏️ Entrada de texto</h2>
+    <p>
+      Puedes usar el widget <code>Entry</code> para permitir que el usuario escriba texto.
+    </p>
+
+<pre style="background-color:#f3f1e0; padding:15px; border-radius:10px;">
+import tkinter as tk
+
+def mostrar_texto():
+    texto = entrada.get()
+    etiqueta.config(text="Has escrito: " + texto)
+
+ventana = tk.Tk()
+ventana.title("Entrada de texto")
+
+# Caja de texto
+entrada = tk.Entry(ventana)
+entrada.pack()
+
+# Botón
+boton = tk.Button(ventana, text="Mostrar", command=mostrar_texto)
+boton.pack()
+
+# Etiqueta para mostrar resultado
+etiqueta = tk.Label(ventana, text="")
+etiqueta.pack()
+
+ventana.mainloop()
+</pre>
+
+    <p>
+      Este programa muestra lo que el usuario escribe en el cuadro de texto al hacer clic en el botón.
+    </p>
+  </section>
+
+  <section>
+    <h2>🎨 Colocando widgets manualmente</h2>
+    <p>
+      Además del método <code>pack()</code>, puedes usar <code>grid()</code> para organizar los elementos en filas y columnas:
+    </p>
+
+<pre style="background-color:#f3f1e0; padding:15px; border-radius:10px;">
+import tkinter as tk
+
+ventana = tk.Tk()
+ventana.title("Ejemplo con grid")
+
+tk.Label(ventana, text="Usuario:").grid(row=0, column=0)
+tk.Entry(ventana).grid(row=0, column=1)
+
+tk.Label(ventana, text="Contraseña:").grid(row=1, column=0)
+tk.Entry(ventana, show="*").grid(row=1, column=1)
+
+tk.Button(ventana, text="Entrar").grid(row=2, column=1)
+
+ventana.mainloop()
+</pre>
+  </section>
+
+  <section>
+    <h2>💡 Ejercicio: Crear tu propia interfaz</h2>
+    <p>
+      A continuación tienes una plantilla base de Tkinter.  
+      Tu tarea será <strong>modificarla</strong> para agregar más elementos.
+    </p>
+
+<pre style="background-color:#f3f1e0; padding:15px; border-radius:10px;">
+import tkinter as tk
+
+def saludar():
+    etiqueta.config(text="¡Hola, " + nombre.get() + "!")
+
+ventana = tk.Tk()
+ventana.title("Mi primera interfaz")
+ventana.geometry("500x500")
+
+tk.Label(ventana, text="Escribe tu nombre:").pack()
+nombre = tk.Entry(ventana)
+nombre.pack()
+
+tk.Button(ventana, text="Saludar", command=saludar).pack()
+etiqueta = tk.Label(
+    ventana, 
+    text="Esperando acciones...",  # Un texto inicial
+    bg="black",                   # Color de fondo (negro)
+    fg="green",                   # Color de letra (verde)
+    font=("Consolas", 12),        # Fuente monoespaciada (como terminal)
+    relief="sunken",              # Estilo de borde (hundido)
+    borderwidth=2,                # Ancho del borde
+    width=50,                     # Ancho fijo (en caracteres)
+    anchor="w",                   # Alinea el texto a la izquierda (Oeste)
+    justify="left"                # Justifica el texto a la izquierda
+)
+etiqueta.pack(pady=10, padx=10) # 'pady' y 'padx' le dan un margen
+
+ventana.mainloop()
+</pre>
+    <p style="background-color:#eef; padding:10px; border-left:4px solid #4a90e2; border-radius:5px;">
+      💡 <Strong>Instrucciones del ejercicio:</Strong>.  
+      </p>
+    <p>Modifica el código anterior y agrega al menos lo siguiente:</p>
+    <p>Vas a utilizar el concepto de abstracción en POO para crear elementos de la interfaz gráfica:</p>
+    <p>Basandote en la guia del siguiente enlace: <a href="https://vt.tiktok.com/ZSy6SjWCu/">Tiktok</a> vas a agregar:
+    <ol>
+      <li>Un bóton que añada personajes.</li>
+      <li>Un bóton que elimine personajes.</li>
+      <li>Un botón que muestre los personajes.</li>
+      <li>Un botón que realice los ataques.</li>
+      <li>Un cuadro que muestre todos los personajes o ataques a modo de terminal.</li>
+    </ol>
+    <p>Una versión mas refinada del código del video se encuentra en el siguiente enlace: <a href="clases.py">codigo python</a> vas a agregar:
+  </section>
+
+  <footer style="margin-top:40px; text-align:center;">
+    <hr>
+    <p>🐍 Tutorial creado para aprender Tkinter desde cero con Python — sin librerías externas.</p>
+  </footer>
+
+</body>
+</html>

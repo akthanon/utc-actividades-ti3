@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Guía: Página Web con Python (Flask)</title>
+  </head>
+<body style="font-family: Arial, sans-serif; margin: 40px; background-color: #fafafa; color: #333; line-height: 1.6;">
+
+  <header>
+    <h1 style="text-align:center; color:#2c3e50;">🐍 Guía completa: Crea una Página Web con Flask (Python)</h1>
+    <p style="text-align:center;">Aprende cómo crear un servidor web y mostrar páginas HTML con Python</p>
+    <hr>
+  </header>
+
+  <section>
+    <h2>¿Qué es Flask?</h2>
+    <p>
+      <strong>Flask</strong> es un microframework de <strong>Python</strong> que permite crear aplicaciones web de forma sencilla.  
+      Es ligero, flexible y perfecto para aprender cómo funcionan los servidores web.
+    </p>
+  </section>
+
+  <section>
+    <h2>Instalación de Flask</h2>
+    <p>Antes de empezar, asegúrate de tener Python instalado. Luego, abre la terminal y ejecuta:</p>
+    <pre style="background-color:#f3f1e0; padding:15px; border-radius:10px;">pip install flask</pre>
+    <p>Esto descargará Flask y todas las dependencias necesarias para ejecutarlo.</p>
+  </section>
+
+  <section>
+    <h2>Tu primer servidor con Flask</h2>
+    <p>Crea un archivo llamado <strong>app.py</strong> con el siguiente contenido:</p>
+
+    <pre style="background-color:#f3f1e0; padding:15px; border-radius:10px;">from flask import Flask
+
+app = Flask(__name__)
+
+@app.route("/")
+def inicio():
+    return "¡Hola mundo desde Flask!"
+
+if __name__ == "__main__":
+    app.run(debug=True)</pre>
+
+    <p>Guarda el archivo y ejecútalo con:</p>
+    <pre style="background-color:#f3f1e0; padding:15px; border-radius:10px;">python app.py</pre>
+
+    <p>
+      Luego abre tu navegador y entra en  
+      <strong>http://127.0.0.1:5000</strong>.  
+      Verás el mensaje: <strong>¡Hola mundo desde Flask!</strong>
+    </p>
+
+    <div style="background-color:#eef; padding:10px; border-left:4px solid #4a90e2; border-radius:5px;">
+      💡 <strong>Consejo:</strong> El modo <strong>debug=True</strong> reinicia automáticamente el servidor cuando cambias el código.
+    </div>
+  </section>
+
+  <section>
+    <h2>Usando plantillas HTML</h2>
+    <p>
+      Flask permite mostrar archivos HTML usando el sistema de plantillas <strong>Jinja2</strong>.  
+      Esto te permite combinar código Python con HTML de forma limpia.
+    </p>
+
+    <pre style="background-color:#f3f1e0; padding:15px; border-radius:10px;">from flask import Flask, render_template
+
+app = Flask(__name__)
+
+@app.route("/")
+def inicio():
+    return render_template("index.html", titulo="Mi Página con Flask")
+
+if __name__ == "__main__":
+    app.run(debug=True)</pre>
+
+    <p>
+      Crea una carpeta llamada <strong>templates</strong> y dentro de ella un archivo <strong>index.html</strong>:
+    </p>
+
+    <pre style="background-color:#f3f1e0; padding:15px; border-radius:10px;">&lt;!DOCTYPE html&gt;
+&lt;html lang="es"&gt;
+&lt;head&gt;
+  &lt;meta charset="UTF-8"&gt;
+  &lt;title&gt;{{ titulo }}&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+  &lt;h1&gt;Bienvenido a mi página Flask&lt;/h1&gt;
+  &lt;p&gt;Esta página fue generada desde una plantilla.&lt;/p&gt;
+&lt;/body&gt;
+&lt;/html&gt;</pre>
+
+    <div style="background-color:#eef; padding:10px; border-left:4px solid #4a90e2; border-radius:5px;">
+      📁 Guarda todas las plantillas HTML dentro de la carpeta <strong>templates</strong> para que Flask pueda encontrarlas.
+    </div>
+  </section>
+
+  <section>
+    <h2>Agregar más rutas</h2>
+    <p>
+      Puedes crear varias páginas (rutas) fácilmente.  
+      Por ejemplo, agrega una página de contacto:
+    </p>
+
+    <pre style="background-color:#f3f1e0; padding:15px; border-radius:10px;">@app.route("/contacto")
+def contacto():
+    return "&lt;h2&gt;Página de contacto&lt;/h2&gt;&lt;p&gt;Email: ejemplo@correo.com&lt;/p&gt;"</pre>
+
+    <p>
+      Luego entra en <strong>http://127.0.0.1:5000/contacto</strong> para ver el resultado.
+    </p>
+
+    <div style="background-color:#eef; padding:10px; border-left:4px solid #4a90e2; border-radius:5px;">
+      <h2>🧩 Ejercicio práctico</h2>
+      <p>
+        Crea tu propio mini sitio con Flask.  
+        Tu tarea consiste en:
+      </p>
+      <ul>
+        <li>Una ruta <strong>/</strong> con un título y un párrafo de bienvenida.</li>
+        <li>Una ruta <strong>/acerca</strong> con una breve descripción tuya o del proyecto.</li>
+        <li>Una ruta <strong>/contacto</strong> con información de contacto ficticia.</li>
+      </ul>
+      <p>
+        💡 <strong>Consejo:</strong> Guarda cada página como una plantilla HTML diferente en la carpeta <strong>templates</strong>.
+      </p>
+    </div>
+  </section>
+
+  <section>
+    <h2>Resumen</h2>
+    <ul>
+      <li><strong>Flask</strong> permite crear servidores web ligeros con Python.</li>
+      <li>Las rutas se definen con <strong>@app.route()</strong>.</li>
+      <li>Las plantillas HTML se guardan dentro de <strong>templates/</strong>.</li>
+      <li>El modo <strong>debug</strong> facilita las pruebas.</li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>Conclusión</h2>
+    <p>
+      Con Flask puedes crear páginas web completas usando solo Python.  
+      Es ideal para principiantes y lo suficientemente potente para proyectos más avanzados,  
+      como APIs, paneles administrativos o sitios dinámmicos.
+    </p>
+  </section>
+
+
+  <footer style="margin-top:40px; text-align:center;">
+    📘 Tutorial educativo: Creando páginas web con Flask — Jorge Padilla
+  </footer>
+    <hr>

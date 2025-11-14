@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Tutorial Básico de HTML</title>
+</head>
+<body style="font-family: Arial, sans-serif; margin: 40px; line-height: 1.6; background-color: #fafafa; color: #333;">
+  <header>
+    <h1 style="text-align: center; color: #2c3e50;">🌐 Tutorial Básico de HTML</h1>
+    <p style="text-align: center;">Guía introductoria para aprender la estructura y etiquetas principales del lenguaje HTML</p>
+    <hr>
+  </header>
+
+  <section>
+    <h2>🧩 ¿Qué es HTML?</h2>
+    <p>
+      HTML (<strong>HyperText Markup Language</strong>) es el lenguaje que se usa para estructurar el contenido de una página web.
+      No es un lenguaje de programación, sino un <strong>lenguaje de marcado</strong>, lo que significa que usa <em>etiquetas</em> para definir partes del contenido
+      (títulos, párrafos, imágenes, enlaces, etc.).
+    </p>
+  </section>
+
+  <section>
+    <h2>📄 Estructura básica de una página HTML</h2>
+    <p>Cada documento HTML debe tener una estructura mínima como esta:</p>
+
+<pre style="background-color:#eee; padding:15px; border-radius:10px;">
+&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+  &lt;head&gt;
+    &lt;meta charset="UTF-8"&gt;
+    &lt;title&gt;Mi primera página&lt;/title&gt;
+  &lt;/head&gt;
+  &lt;body&gt;
+    &lt;h1&gt;Hola Mundo&lt;/h1&gt;
+    &lt;p&gt;Esta es mi primera página web.&lt;/p&gt;
+  &lt;/body&gt;
+&lt;/html&gt;
+</pre>
+
+    <h3>Explicación:</h3>
+    <table border="1" cellspacing="0" cellpadding="6">
+      <tr><th>Etiqueta</th><th>Descripción</th></tr>
+      <tr><td><code>&lt;!DOCTYPE html&gt;</code></td><td>Indica al navegador que el documento es HTML5.</td></tr>
+      <tr><td><code>&lt;html&gt;</code></td><td>Es la raíz del documento HTML.</td></tr>
+      <tr><td><code>&lt;head&gt;</code></td><td>Contiene información invisible para el usuario (título, metadatos, etc.).</td></tr>
+      <tr><td><code>&lt;meta charset="UTF-8"&gt;</code></td><td>Permite usar caracteres especiales (como ñ, á, é, etc.).</td></tr>
+      <tr><td><code>&lt;title&gt;</code></td><td>Define el título que aparece en la pestaña del navegador.</td></tr>
+      <tr><td><code>&lt;body&gt;</code></td><td>Contiene todo el contenido visible de la página.</td></tr>
+    </table>
+  </section>
+
+  <section>
+    <h2>🧱 Etiquetas comunes en HTML</h2>
+
+    <h3>1. Títulos (<code>&lt;h1&gt;</code> a <code>&lt;h6&gt;</code>)</h3>
+<pre style="background-color:#eee; padding:15px; border-radius:10px;">
+&lt;h1&gt;Título principal&lt;/h1&gt;
+&lt;h2&gt;Subtítulo&lt;/h2&gt;
+&lt;h3&gt;Título menor&lt;/h3&gt;
+</pre>
+
+    <p>Los títulos se usan jerárquicamente (de mayor a menor importancia).</p>
+
+    <h3>2. Párrafos (<code>&lt;p&gt;</code>)</h3>
+<pre style="background-color:#eee; padding:15px; border-radius:10px;">
+&lt;p&gt;Este es un párrafo de texto.&lt;/p&gt;
+</pre>
+
+    <h3>3. Enlaces (<code>&lt;a&gt;</code>)</h3>
+<pre style="background-color:#eee; padding:15px; border-radius:10px;">
+&lt;a href="https://www.google.com"&gt;Ir a Google&lt;/a&gt;
+</pre>
+
+    <p>El atributo <code>href</code> indica la dirección del enlace.</p>
+
+    <h3>4. Imágenes (<code>&lt;img&gt;</code>)</h3>
+<pre style="background-color:#eee; padding:15px; border-radius:10px;">
+&lt;img src="gato.jpg" alt="Un gato bonito"&gt;
+</pre>
+
+    <ul>
+      <li><strong>src:</strong> ubicación de la imagen</li>
+      <li><strong>alt:</strong> texto alternativo si la imagen no se puede mostrar</li>
+    </ul>
+
+    <h3>5. Listas</h3>
+    <p><strong>Lista desordenada (con viñetas):</strong></p>
+<pre style="background-color:#eee; padding:15px; border-radius:10px;">
+&lt;ul&gt;
+  &lt;li&gt;Manzana&lt;/li&gt;
+  &lt;li&gt;Banana&lt;/li&gt;
+  &lt;li&gt;Naranja&lt;/li&gt;
+&lt;/ul&gt;
+</pre>
+
+    <p><strong>Lista ordenada (con números):</strong></p>
+<pre style="background-color:#eee; padding:15px; border-radius:10px;">
+&lt;ol&gt;
+  &lt;li&gt;Encender la computadora&lt;/li&gt;
+  &lt;li&gt;Abrir el navegador&lt;/li&gt;
+  &lt;li&gt;Entrar a la página&lt;/li&gt;
+&lt;/ol&gt;
+</pre>
+
+    <h3>6. Tablas</h3>
+<pre style="background-color:#eee; padding:15px; border-radius:10px;">
+&lt;table border="1"&gt;
+  &lt;tr&gt;
+    &lt;th&gt;Nombre&lt;/th&gt;
+    &lt;th&gt;Edad&lt;/th&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+    &lt;td&gt;Jorge&lt;/td&gt;
+    &lt;td&gt;32&lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+    &lt;td&gt;Crisbel&lt;/td&gt;
+    &lt;td&gt;28&lt;/td&gt;
+  &lt;/tr&gt;
+&lt;/table&gt;
+</pre>
+
+    <h3>7. Comentarios</h3>
+<pre style="background-color:#eee; padding:15px; border-radius:10px;">
+&lt;!-- Esto es un comentario y no se muestra en la página --&gt;
+</pre>
+  </section>
+
+  <section>
+    <h2>💡 Ejercicio: Modificar una plantilla</h2>
+    <p>A continuación tienes una <strong>plantilla base</strong> que puedes copiar en un archivo llamado <code>index.html</code>.
+    Tu tarea será <strong>modificarla</strong> agregando más elementos según las instrucciones.</p>
+
+<pre style="background-color:#eee; padding:15px; border-radius:10px;">
+&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+  &lt;head&gt;
+    &lt;meta charset="UTF-8"&gt;
+    &lt;title&gt;Mi Página Personal&lt;/title&gt;
+  &lt;/head&gt;
+  &lt;body&gt;
+    &lt;h1&gt;Bienvenido a mi página&lt;/h1&gt;
+    &lt;p&gt;Hola, me llamo Jorge y esta es mi primera página web.&lt;/p&gt;
+
+    &lt;h2&gt;Mis pasatiempos&lt;/h2&gt;
+    &lt;ul&gt;
+      &lt;li&gt;Leer&lt;/li&gt;
+      &lt;li&gt;Programar&lt;/li&gt;
+      &lt;li&gt;Escuchar música&lt;/li&gt;
+    &lt;/ul&gt;
+
+    &lt;h2&gt;Contacto&lt;/h2&gt;
+    &lt;p&gt;Puedes escribirme a 
+      &lt;a href="mailto:jorge@ejemplo.com"&gt;jorge@ejemplo.com&lt;/a&gt;
+    &lt;/p&gt;
+  &lt;/body&gt;
+&lt;/html&gt;
+</pre>
+
+    <h3>🧠 Instrucciones</h3>
+    <p>Modifica el código anterior y agrega al menos lo siguiente:</p>
+    <ol>
+      <li>Una <strong>imagen</strong> con la etiqueta <code>&lt;img&gt;</code>.</li>
+      <li>Una <strong>tabla</strong> con información (por ejemplo, tus comidas favoritas o tus amigos).</li>
+      <li>Un nuevo <strong>título y párrafo</strong> sobre un tema que te guste.</li>
+      <li>Una <strong>lista ordenada</strong> con pasos para hacer algo que disfrutes.</li>
+    </ol>
+
+    <p><em>Opcional:</em> Agrega un comentario <code>&lt;!-- ... --&gt;</code> para describir alguna parte del código.</p>
+  </section>
+
+
+    <h3>⚔️ Actividad final del ejercicio 3</h3>
+    <p>Pasa del nivel 8 en notpron: <a href="https://www.deathball.net/notpron/">Not porn</a></p>
+
+  <footer style="margin-top:40px; text-align:center;">
+    <hr>
+    <p>📘 Tutorial creado para aprender HTML desde cero.</p>
+  </footer>
+</body>
+</html>
