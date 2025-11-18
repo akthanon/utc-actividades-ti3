@@ -84,6 +84,7 @@ pygame.display.set_caption("Movimiento básico")
 # Jugador
 x, y = 230, 180
 velocidad = 5
+clock = pygame.time.Clock()
 
 ejecutando = True
 while ejecutando:
@@ -105,6 +106,7 @@ while ejecutando:
     ventana.fill((0, 0, 0))
     pygame.draw.rect(ventana, (255, 0, 0), (x, y, 40, 40))
     pygame.display.update()
+    clock.tick(15)
 
 pygame.quit()
 </pre>
@@ -120,9 +122,14 @@ pygame.quit()
       A partir del código anterior, utilizando la POO modifica la plantilla para añadir más elementos y mecánicas simples. Por ejemplo:
     </p>
     <ul>
-      <li>Añadir un enemigo o un obstáculo (otro rectángulo de diferente color).</li>
-      <li>Detectar colisiones con el enemigo.</li>
-      <li>Disparar proyectiles.</li>
+      <li>Cambia el tamaño de la ventana a tu gusto.</li>
+      <li>Cambia la cantidad de FPS a tu gusto.</li>
+      <li>Crea un objeto de Personaje principal, enemigos, proyectiles y obstáculos.</li>
+      <li>Añadir a modo de instancias 3 enemigos, un obstáculo (otros rectángulo de diferente color).</li>
+      <li>Detectar colisiones con el enemigo (Daño).</li>
+      <li>El enemigo se destruye al chocar con el proyectil.</li>
+      <li>Disparar proyectiles y destruir al enemigo.</li>
+      <li>Tienes libertad creativa en la implementación, puede ser shooter, naves, rpg, etc.</li>
     </ul>
         <p style="background-color:#f3f1e0; padding:10px; border-left:4px solid #4a90e2; border-radius:5px;">
       💡 <b>Consejo:</b> Experimenta con diferentes tamaños de ventana, colores y velocidades.
